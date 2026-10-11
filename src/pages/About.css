@@ -87,6 +87,15 @@
   box-shadow: 0 22px 55px rgba(15, 35, 65, 0.14);
 }
 
+.about-page-visual img {
+  animation: about-photo-reveal 1.5s ease both;
+}
+
+@keyframes about-photo-reveal {
+  from { opacity: 0.35; transform: scale(1.025); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .about-page-values {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -116,6 +125,31 @@
   line-height: 1.8;
 }
 
+.about-page-values .about-value h2 {
+  margin-top: 10px;
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  line-height: 1.35;
+}
+
+.about-value-label {
+  display: block;
+  margin-top: 14px;
+  color: var(--blue, #4f46e5);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.about-page-values blockquote {
+  margin: 20px 0 0;
+  padding: 12px 0 12px 18px;
+  border-left: 3px solid var(--blue, #4f46e5);
+  color: var(--muted, #64748b);
+  font-style: italic;
+  line-height: 1.7;
+}
+
 .about-page-approach {
   max-width: 850px;
   margin: 88px auto 0;
@@ -131,6 +165,43 @@
   margin: 0 auto;
 }
 
+.about-page-approach h3 {
+  margin: 46px 0 22px;
+  color: var(--navy, #10243a);
+  font-size: 1.5rem;
+}
+
+.about-principles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  text-align: left;
+}
+
+.about-principles article {
+  padding: 23px 20px;
+  border: 1px solid rgba(26, 54, 93, 0.07);
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(20, 45, 75, 0.06);
+}
+
+.about-principles article > svg {
+  color: var(--blue, #4f46e5);
+}
+
+.about-principles h4 {
+  margin: 14px 0 7px;
+  color: var(--navy, #10243a);
+  font-size: 1rem;
+}
+
+.about-principles p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
 .about-page .footer .brand {
   text-decoration: none;
 }
@@ -140,6 +211,7 @@
   .about-page-story { grid-template-columns: 1fr; }
   .about-page-copy { max-width: 720px; }
   .about-page-visual { height: 390px; }
+  .about-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {
@@ -150,4 +222,9 @@
   .about-page-values { grid-template-columns: 1fr; gap: 18px; margin-top: 48px; }
   .about-page-values .about-value { min-height: unset; }
   .about-page-approach { margin-top: 62px; }
+  .about-principles { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page-visual img { animation: none; }
 }

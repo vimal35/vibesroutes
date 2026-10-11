@@ -7,7 +7,7 @@ import './Home.css';
 import {
   Building2, MapPin, CalendarDays, Search, ChevronDown, Users,
   ShieldCheck, Headphones, Wallet, Plane, Phone,
-  Mail, MapPin as Pin, Globe, CreditCard, Sparkles, ArrowRight, ArrowUpRight,
+  Mail, MapPin as Pin, Globe, CreditCard, Sparkles, ArrowRight,
   Bell, Ticket, Banknote, Quote, Clock,
 } from 'lucide-react';
 
@@ -33,93 +33,6 @@ const LOCATION_REDIRECT = {
   Munnar: 'Munnar',
   Hyderabad: 'Hyderabad',
 };
-
-const destinations = [
-  {
-    city: 'Ooty',
-    region: 'Tamil Nadu',
-    description: 'Tea gardens, cool Nilgiri air, and scenic hill roads.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ooty%20Th%C3%A9%20Plantation.JPG?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Ooty_Th%C3%A9_Plantation.JPG',
-    credit: 'Harrieta171',
-    license: 'CC BY-SA',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
-    hotelCity: 'Ooty',
-  },
-  {
-    city: 'Kodaikanal',
-    region: 'Tamil Nadu',
-    description: 'A peaceful hill town centered around its star-shaped lake.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kodaikanal-lake.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Kodaikanal-lake.jpg',
-    credit: 'युकेश',
-    license: 'Public domain',
-    licenseUrl: 'https://commons.wikimedia.org/wiki/File:Kodaikanal-lake.jpg',
-  },
-  {
-    city: 'Munnar',
-    region: 'Kerala',
-    description: 'Rolling tea estates and cool highland scenery in the Western Ghats.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tea%20Estate%20in%20Munnar.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Tea_Estate_in_Munnar.jpg',
-    credit: 'Kps',
-    license: 'Public domain',
-    licenseUrl: 'https://commons.wikimedia.org/wiki/File:Tea_Estate_in_Munnar.jpg',
-    hotelCity: 'Munnar',
-  },
-  {
-    city: 'Alleppey',
-    region: 'Kerala',
-    description: 'Quiet canals and houseboat routes through the Kerala backwaters.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Alleppey_backwaters.1.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Alleppey_backwaters.1.jpg',
-    credit: 'Sravanbaddi',
-    license: 'CC BY-SA 4.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-  },
-  {
-    city: 'Coorg',
-    region: 'Karnataka',
-    description: 'Coffee-growing hills, forest paths, and monsoon-fed waterfalls.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20Plantation%20in%20Coorg..jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Coffee_Plantation_in_Coorg..jpg',
-    credit: 'Rudolph A. Furtado',
-    license: 'CC0',
-    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
-  },
-  {
-    city: 'Mysuru',
-    region: 'Karnataka',
-    description: 'A heritage city known for its palace and historic streets.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mysore%20palace%20front%20view%20001.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Mysore_palace_front_view_001.jpg',
-    credit: 'Rijin S',
-    license: 'CC BY-SA 4.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-  },
-  {
-    city: 'Pondicherry',
-    region: 'Puducherry',
-    description: 'French Quarter lanes meet a breezy Bay of Bengal promenade.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/French%20Quarter%20in%20Pondicherry%20%285%29%20%2823662220798%29.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:French_Quarter_in_Pondicherry_(5)_(23662220798).jpg',
-    credit: 'Richard Mortel',
-    license: 'CC BY 2.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
-    hotelCity: 'Pondicherry',
-  },
-  {
-    city: 'Hyderabad',
-    region: 'Telangana',
-    description: 'Explore the Charminar, historic bazaars, and Deccan culture.',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic%20View%20of%20the%20Charminar%2C%20Hyderabad.jpg?width=960',
-    source: 'https://commons.wikimedia.org/wiki/File:Panoramic_View_of_the_Charminar,_Hyderabad.jpg',
-    credit: 'Preeti Prajapati',
-    license: 'CC BY-SA 4.0',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-    hotelCity: 'Hyderabad',
-  },
-];
 
 const steps = [
   {
@@ -424,14 +337,6 @@ export default function Home() {
   };
 
   const handleSearch = () => goToHotels(location);
-  const exploreDestination = (destination) => {
-    if (destination.hotelCity) {
-      goToHotels(destination.hotelCity);
-      return;
-    }
-
-    navigate(HOTEL_LIST_PATH);
-  };
   return (
     <>
       <header className={`header ${scrolled || menuOpen ? 'scrolled' : ''}`}>
@@ -446,9 +351,9 @@ export default function Home() {
           <nav className="nav-links" aria-label="Main navigation">
             <a href="#home" className="active">Home</a>
             <Link to="/about">About Us</Link>
-            <a href="#destinations">Explore Destinations</a>
-            <a href="#contact">Contact Us</a>
+            <Link to="/explore-destinations">Explore Destinations</Link>
             <Link to={HOTEL_LIST_PATH}>Hotel List</Link>
+            <a href="#contact">Contact Us</a>
           </nav>
 
           <div className="header-actions">
@@ -471,9 +376,9 @@ export default function Home() {
           <nav className="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
             <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
             <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
-            <a href="#destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
+            <Link to="/explore-destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</Link>
             <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotel List</Link>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
           </nav>
         )}
       </header>
@@ -627,40 +532,6 @@ export default function Home() {
         <div className="scroll-hint">
           <div className="mouse" />
           Scroll to explore
-        </div>
-      </section>
-
-      <section className="section" id="destinations" aria-labelledby="destinations-title">
-        <div className="container">
-          <div className="section-head">
-            <span className="section-tag">Explore South India</span>
-            <h2 className="section-title" id="destinations-title">Explore <span className="hl">Destinations</span></h2>
-            <p className="section-desc">
-              Find inspiration for your next trip, from Nilgiri tea gardens to Kerala backwaters and historic city streets.
-            </p>
-          </div>
-
-          <div className="dest-grid dest-grid-six">
-            {destinations.map((d) => (
-              <article key={d.city} className="dest-card">
-                <img src={d.img} alt={`${d.city} - ${d.region}`} loading="lazy" decoding="async" />
-                <div className="overlay" />
-                <div className="info">
-                  <div className="city">{d.city}</div>
-                  <div className="country">{d.region}</div>
-                  <p className="dest-description">{d.description}</p>
-                  <button className="dest-explore" onClick={() => exploreDestination(d)}>
-                    Explore stays <ArrowUpRight size={16} />
-                  </button>
-                </div>
-                <div className="dest-credit" aria-label={`Photo by ${d.credit}`}>
-                  <a href={d.source} target="_blank" rel="noreferrer">Photo: {d.credit}</a>
-                  <span aria-hidden="true"> | </span>
-                  <a href={d.licenseUrl} target="_blank" rel="noreferrer">{d.license}</a>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Eye, Target, ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
+import { Building2, Eye, Target, ArrowRight, Phone, Mail, MapPin, Heart, Compass, RefreshCw } from 'lucide-react';
 import './Home.css';
 import './About.css';
 
@@ -29,7 +29,7 @@ const aboutImages = [
   },
 ];
 
-function AboutFooter() {
+export function AboutFooter({ activePage = 'about' }) {
   return (
     <footer className="footer" id="contact">
       <div className="container">
@@ -49,7 +49,7 @@ function AboutFooter() {
           <div>
             <h5>Company</h5>
             <ul className="footer-links">
-              <li><Link to="/about" aria-current="page">About Us</Link></li>
+              <li><Link to="/about" aria-current={activePage === 'about' ? 'page' : undefined}>About Us</Link></li>
               <li><a href="#">Careers</a></li><li><a href="#">Press &amp; Media</a></li>
               <li><a href="#">Partner Program</a></li><li><a href="#">Sustainability</a></li>
             </ul>
@@ -57,6 +57,7 @@ function AboutFooter() {
           <div>
             <h5>Explore</h5>
             <ul className="footer-links">
+              <li><Link to="/explore-destinations">Explore Destinations</Link></li>
               <li><Link to={HOTEL_LIST_PATH}>Hotels &amp; Resorts</Link></li>
               <li><Link to={HOTEL_LIST_PATH}>Villas &amp; Apartments</Link></li>
               <li><a href="#">Flight + Hotel</a></li><li><a href="#">Group Booking</a></li>
@@ -81,10 +82,54 @@ function AboutFooter() {
   );
 }
 
+export function SitePageHeader({ activePage }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const aboutLinkClass = activePage === 'about' ? 'active' : '';
+  const destinationsLinkClass = activePage === 'destinations' ? 'active' : '';
+
+  return (
+    <header className={`header scrolled ${menuOpen ? 'menu-open' : ''}`}>
+      <div className="container header-inner">
+        <Link to="/" className="brand"><div className="logo-badge"><Building2 size={22} /></div><span className="brand-name">Stay<em>Ease</em></span></Link>
+        <nav className="nav-links" aria-label="Main navigation">
+          <Link to="/">Home</Link>
+          <Link to="/about" className={aboutLinkClass} aria-current={activePage === 'about' ? 'page' : undefined}>About Us</Link>
+          <Link to="/explore-destinations" className={destinationsLinkClass} aria-current={activePage === 'destinations' ? 'page' : undefined}>Explore Destinations</Link>
+          <Link to={HOTEL_LIST_PATH}>Hotel List</Link>
+          <Link to="/#contact">Contact Us</Link>
+        </nav>
+        <div className="header-actions">
+          <Link to={HOTEL_LIST_PATH} className="btn-signup property-cta">List your property</Link>
+          <Link to="/AdminPanel" className="btn-login admin-panel-link">Admin Panel</Link>
+          <button className="hamburger" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="page-mobile-navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+              {menuOpen ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
+            </svg>
+          </button>
+        </div>
+      </div>
+      {menuOpen && (
+        <nav className="mobile-nav" id="page-mobile-navigation" aria-label="Mobile navigation">
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
+          <Link to="/explore-destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</Link>
+          <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotel List</Link>
+          <Link to="/#contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+        </nav>
+      )}
+    </header>
+  );
+}
+
 export default function About() {
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
+    aboutImages.forEach(({ img }) => {
+      const preload = new Image();
+      preload.src = img;
+    });
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     const timer = window.setInterval(() => setImageIndex((current) => (current + 1) % aboutImages.length), 4500);
     return () => window.clearInterval(timer);
@@ -94,33 +139,22 @@ export default function About() {
 
   return (
     <div className="about-page">
-      <header className="header scrolled">
-        <div className="container header-inner">
-          <Link to="/" className="brand"><div className="logo-badge"><Building2 size={22} /></div><span className="brand-name">Stay<em>Ease</em></span></Link>
-          <nav className="nav-links" aria-label="Main navigation">
-            <Link to="/">Home</Link><Link to="/about" className="active" aria-current="page">About Us</Link>
-            <Link to="/#destinations">Explore Destinations</Link><Link to="/#contact">Contact Us</Link><Link to={HOTEL_LIST_PATH}>Hotel List</Link>
-          </nav>
-          <div className="header-actions">
-            <Link to={HOTEL_LIST_PATH} className="btn-signup property-cta">List your property</Link>
-            <Link to="/AdminPanel" className="btn-login admin-panel-link">Admin Panel</Link>
-          </div>
-        </div>
-      </header>
+      <SitePageHeader activePage="about" />
 
       <main className="about-page-main">
         <section className="about-page-intro container" aria-labelledby="about-title">
           <span className="section-tag">A better way to get away</span>
-          <h1 id="about-title">About <span className="hl">StayEase</span></h1>
-          <p>We make it easier to find a stay that feels right for your journey.</p>
+          <h1 id="about-title">About <span className="hl">Stay Ease</span></h1>
+          <p>Every journey deserves a comfortable stay. Discover places that feel right for your journey, from peaceful hill retreats and coastal escapes to vibrant city stays across South India.</p>
         </section>
 
         <section className="about-page-story container" aria-label="Our story">
           <div className="about-page-copy">
             <span className="about-page-kicker">Travel, made simpler</span>
-            <h2>Make room for the moments that matter.</h2>
-            <p>Every memorable trip begins with a place that feels right. StayEase helps travelers discover destinations, explore available stays, and compare the details that matter when choosing where to stay.</p>
-            <p>From a quiet escape in the hills to a lively city break, we bring the discovery journey together in one place. Browse with confidence, find a stay that suits your plans, and spend more time looking forward to the trip ahead.</p>
+            <h2>Where every journey finds its stay</h2>
+            <p>Travel is about more than reaching a destination. It is about the moments along the way, the places you discover, and the comfort of having somewhere to unwind. Stay Ease is built around making the search for your next stay simpler, clearer, and more convenient.</p>
+            <p>From mist-covered hill stations and tranquil backwaters to lively cities and relaxing coastal getaways, we bring destination inspiration and stay discovery together in one place. Whether you are planning a quick weekend escape, a family holiday, a romantic getaway, or a business trip, Stay Ease helps you explore your options and find a stay that fits your plans.</p>
+            <p>Our goal is simple: make discovering your next stay feel just as enjoyable as the journey itself.</p>
             <Link to={HOTEL_LIST_PATH} className="btn-signup about-page-cta">Explore stays <ArrowRight size={17} /></Link>
           </div>
           <div className="about-visual about-page-visual">
@@ -134,14 +168,34 @@ export default function About() {
         </section>
 
         <section className="about-page-values container" aria-label="Our vision and mission">
-          <article className="about-value"><Eye size={30} aria-hidden="true" /><h2>Our Vision</h2><p>Make it easier for travelers to discover stays that feel right for every kind of trip.</p></article>
-          <article className="about-value"><Target size={30} aria-hidden="true" /><h2>Our Mission</h2><p>Bring destination discovery, useful stay details, and a clear booking journey together in one place.</p></article>
+          <article className="about-value">
+            <Eye size={30} aria-hidden="true" />
+            <span className="about-value-label">Our Vision</span>
+            <h2>Making every journey easier to imagine and plan</h2>
+            <p>Our vision is to make travel and stay discovery more accessible, intuitive, and inspiring. We aspire to help travelers explore new destinations with confidence, discover places that match their preferences, and spend less time searching and more time looking forward to the journey ahead.</p>
+            <blockquote>“Every great journey begins with finding the right place to stay.”</blockquote>
+          </article>
+          <article className="about-value">
+            <Target size={30} aria-hidden="true" />
+            <span className="about-value-label">Our Mission</span>
+            <h2>Bringing travelers and the right stays closer together</h2>
+            <p>Our mission is to create a seamless stay-discovery experience through thoughtful design, useful information, and a convenient booking journey. We aim to help travelers compare their options, explore destinations, and make informed decisions based on their needs and preferences.</p>
+            <p>By keeping convenience, clarity, and the traveler experience at the heart of what we do, Stay Ease strives to make planning a stay feel straightforward, welcoming, and reliable.</p>
+          </article>
         </section>
 
         <section className="about-page-approach container">
           <span className="section-tag">Thoughtful by design</span>
-          <h2>A clear path from inspiration to check-in.</h2>
-          <p>Start with a destination, compare the stays available, and choose the option that works for you. StayEase keeps the experience focused on the details travelers need to plan their next stay.</p>
+          <h2>Built around better stay experiences</h2>
+          <p>Stay Ease is designed with a simple idea in mind: finding a place to stay should be easier than ever. We bring together destination discovery and accommodation exploration in an experience that helps travelers move from inspiration to planning with greater ease.</p>
+          <p>Our approach focuses on thoughtful technology, accessible information, and a traveler-first experience. As the platform grows, our focus remains on helping people discover places worth visiting and stays that suit the way they travel.</p>
+          <h3>What guides us</h3>
+          <div className="about-principles">
+            <article><Heart size={23} aria-hidden="true" /><h4>Traveler first</h4><p>Design the experience around real travel needs.</p></article>
+            <article><Target size={23} aria-hidden="true" /><h4>Clarity and convenience</h4><p>Make exploring stay options straightforward.</p></article>
+            <article><Compass size={23} aria-hidden="true" /><h4>Discover more</h4><p>Help travelers find destinations and experiences worth exploring.</p></article>
+            <article><RefreshCw size={23} aria-hidden="true" /><h4>Continuous improvement</h4><p>Keep making the stay-discovery journey better.</p></article>
+          </div>
         </section>
       </main>
       <AboutFooter />
