@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight, Mountain, Waves, Umbrella, Landmark } from 'lucide-react';
+import { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AboutFooter, SitePageHeader } from './About';
 import './Home.css';
@@ -86,6 +87,10 @@ function stayPath(destination) {
 }
 
 export default function ExploreDestinations() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="explore-destinations-page">
       <SitePageHeader activePage="destinations" />

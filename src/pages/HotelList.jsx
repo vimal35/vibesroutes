@@ -1,6 +1,6 @@
 // src/pages/HotelList.jsx
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Search,
@@ -640,6 +640,12 @@ const readSearch = (params) => {
       1,
       6,
       2,
+    ),
+    children: clampInt(
+      params.get('children'),
+      0,
+      6,
+      0,
     ),
     rooms: clampInt(
       params.get('rooms'),
@@ -1398,17 +1404,6 @@ export default function HotelList() {
       ),
     );
 
-  const [fromSearch] =
-    useState(
-      () =>
-        searchParams.has(
-          'location',
-        ) ||
-        searchParams.has(
-          'checkIn',
-        ),
-    );
-
   const today =
     toInputDate(new Date());
 
@@ -1434,6 +1429,11 @@ export default function HotelList() {
       initial.adults,
     );
 
+  const [children, setChildren] =
+    useState(
+      initial.children,
+    );
+
   const [rooms, setRooms] =
     useState(
       initial.rooms,
@@ -1442,7 +1442,7 @@ export default function HotelList() {
   /* ================================ FILTERS ================================ */
 
   const [query, setQuery] =
-    useState('');
+    useState(() => searchParams.get('query') || '');
 
   const [sort, setSort] =
     useState(
@@ -1498,6 +1498,10 @@ export default function HotelList() {
   const resultsRef =
     useRef(null);
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const nights =
     nightsBetween(
       checkIn,
@@ -1539,6 +1543,10 @@ export default function HotelList() {
       );
     }
 
+    if (query.trim()) {
+      next.set('query', query.trim());
+    }
+
     next.set(
       'checkIn',
       checkIn,
@@ -1552,6 +1560,11 @@ export default function HotelList() {
     next.set(
       'adults',
       String(adults),
+    );
+
+    next.set(
+      'children',
+      String(children),
     );
 
     next.set(
@@ -1577,7 +1590,9 @@ export default function HotelList() {
     checkIn,
     checkOut,
     adults,
+    children,
     rooms,
+    query,
   ]);
 
   /* ================================ SCROLL ================================ */
@@ -1604,20 +1619,6 @@ export default function HotelList() {
           'smooth',
       });
     };
-
-  useEffect(() => {
-    if (!fromSearch)
-      return undefined;
-
-    const timer =
-      setTimeout(
-        scrollToResults,
-        250,
-      );
-
-    return () =>
-      clearTimeout(timer);
-  }, [fromSearch]);
 
   /* ================================ DRAWER ================================ */
 
@@ -1741,21 +1742,8 @@ export default function HotelList() {
 
           if (
             search &&
-            !hotel.name
-              .toLowerCase()
-              .includes(
-                search,
-              ) &&
-            !hotel.city
-              .toLowerCase()
-              .includes(
-                search,
-              ) &&
-            !hotel.area
-              .toLowerCase()
-              .includes(
-                search,
-              )
+            ![hotel.name, hotel.city, hotel.area, hotel.state]
+              .some((value) => String(value || '').toLowerCase().includes(search))
           ) {
             return false;
           }
@@ -2546,6 +2534,18 @@ export default function HotelList() {
                 </select>
 
                 <select
+                  value={children}
+                  onChange={(event) => setChildren(Number(event.target.value))}
+                  aria-label="Number of children"
+                >
+                  {[0, 1, 2, 3, 4, 5, 6].map((value) => (
+                    <option key={value} value={value}>
+                      {value} {value === 1 ? 'child' : 'children'}
+                    </option>
+                  ))}
+                </select>
+
+                <select
                   value={
                     rooms
                   }
@@ -3010,9 +3010,13 @@ export default function HotelList() {
         </div>
 
         <div className="hl-footer-base">
-          © 2025 TravelNest.
-          Prices are shown
-          in Indian rupees.
+          <span className="hl-footer-credit">Designed and developed by <a href="https://adlinkwebservices.in/" target="_blank" rel="noopener noreferrer">Adlink web services</a> <span aria-hidden="true">/</span> <Link to="/AdminPanel">Admin Panel</Link></span>
+          <nav className="hl-footer-policy-links" aria-label="Policies">
+            <Link to="/refund-policy">Refund Policy</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>
+            <Link to="/cancellation-policy">Cancellation Policy</Link>
+          </nav>
         </div>
       </footer>
     </div>

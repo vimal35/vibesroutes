@@ -1,14 +1,15 @@
 // src/pages/Home.jsx
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AboutFooter } from './About';
 import './Home.css';
 
 import {
   Building2, MapPin, CalendarDays, Search, ChevronDown, Users,
-  ShieldCheck, Headphones, Wallet, Plane, Phone,
-  Mail, MapPin as Pin, Globe, CreditCard, Sparkles, ArrowRight,
-  Bell, Ticket, Banknote, Quote, Clock,
+  ShieldCheck, Headphones, Wallet, Plane,
+  Globe, CreditCard, Sparkles, ArrowRight,
+  Bell, Ticket, Banknote, Quote, Clock, UserRound, MessageCircle,
 } from 'lucide-react';
 
 const HOTEL_LIST_PATH = '/HotelList';
@@ -23,16 +24,14 @@ const SEARCH_LOCATIONS = [
   { city: 'Hyderabad', state: 'Telangana', stays: 15 },
 ];
 
-const LOCATION_REDIRECT = {
-  Pondicherry: 'Pondicherry',
-  Bangalore: 'Bangalore',
-  Kerala: 'Munnar',
-  Goa: 'Pondicherry',
-  Ooty: 'Ooty',
-  Coimbatore: 'Coimbatore',
-  Munnar: 'Munnar',
-  Hyderabad: 'Hyderabad',
-};
+const HOME_DESTINATIONS = [
+  { city: 'Pondicherry', state: 'Tamil Nadu', hotels: 15, image: 'https://commons.wikimedia.org/wiki/Special:FilePath/French%20Quarter%20in%20Pondicherry%20%285%29%20%2823662220798%29.jpg?width=960' },
+  { city: 'Munnar', state: 'Kerala', hotels: 15, image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tea%20Estate%20in%20Munnar.jpg?width=960' },
+  { city: 'Ooty', state: 'Tamil Nadu', hotels: 15, image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ooty%20Th%C3%A9%20Plantation.JPG?width=960' },
+  { city: 'Coimbatore', state: 'Tamil Nadu', hotels: 15, image: 'https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/201111221336068199-2f814bec41e211e7be9702755708f0b3.jpg' },
+  { city: 'Bangalore', state: 'Karnataka', hotels: 15, image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80' },
+  { city: 'Hyderabad', state: 'Telangana', hotels: 15, image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic%20View%20of%20the%20Charminar%2C%20Hyderabad.jpg?width=960' },
+];
 
 const steps = [
   {
@@ -41,6 +40,8 @@ const steps = [
     dur: 'Less than 1 minute',
     img: 'https://images.pexels.com/photos/7368269/pexels-photo-7368269.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: Search,
+    to: '/explore-destinations',
+    linkLabel: 'Explore destinations',
   },
   {
     title: 'Compare & Book',
@@ -48,6 +49,8 @@ const steps = [
     dur: 'Instant confirmation',
     img: 'https://images.pexels.com/photos/7368277/pexels-photo-7368277.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: CreditCard,
+    to: HOTEL_LIST_PATH,
+    linkLabel: 'Browse hotels',
   },
   {
     title: 'Travel & Enjoy',
@@ -55,6 +58,8 @@ const steps = [
     dur: 'Enjoy your trip',
     img: 'https://images.pexels.com/photos/7368290/pexels-photo-7368290.jpeg?auto=compress&cs=tinysrgb&w=800',
     icon: Plane,
+    to: '/contact',
+    linkLabel: 'Contact support',
   },
 ];
 
@@ -80,6 +85,17 @@ const hotels = [
     reviews: 3210,
     amenities: ['Luxury Palace', 'Spa', 'Pool', 'Breakfast'],
     badge: 'Luxury',
+  },
+  {
+    name: 'Vivanta Coimbatore',
+    city: 'Coimbatore',
+    country: 'Tamil Nadu',
+    img: 'https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/201111221336068199-2f814bec41e211e7be9702755708f0b3.jpg',
+    price: 6800,
+    rating: 8.9,
+    reviews: 1884,
+    amenities: ['City Centre', 'Pool', 'Wi-Fi', 'Breakfast'],
+    badge: 'Great Value',
   },
   {
     name: 'Taj Madikeri Resort & Spa',
@@ -114,17 +130,6 @@ const hotels = [
     amenities: ['Colonial Heritage', 'Garden', 'Fireplace', 'Breakfast'],
     badge: 'Trending',
   },
-  {
-    name: 'Vivanta Coimbatore',
-    city: 'Coimbatore',
-    country: 'Tamil Nadu',
-    img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfe4c?auto=format&fit=crop&w=900&q=80',
-    price: 6800,
-    rating: 8.9,
-    reviews: 1884,
-    amenities: ['City Centre', 'Pool', 'Wi-Fi', 'Breakfast'],
-    badge: 'Great Value',
-  },
 ];
 
 const offers = [
@@ -133,14 +138,16 @@ const offers = [
     title: 'Early Summer Escapes',
     desc: 'Book beachfront and hill-station stays and save up to 40% at top-rated resorts.',
     img: 'https://images.pexels.com/photos/29766360/pexels-photo-29766360.jpeg?auto=compress&cs=tinysrgb&w=900',
-    btn: 'Grab the deal',
+    btn: 'Grab the Deal',
+    source: 'deal',
   },
   {
     tag: 'Members Only',
     title: 'Book + Save Extra 15%',
     desc: 'Sign up to StayEase Pro and unlock exclusive member prices on every booking.',
     img: 'https://images.pexels.com/photos/5577693/pexels-photo-5577693.jpeg?auto=compress&cs=tinysrgb&w=900',
-    btn: 'Join for free',
+    btn: 'Join for Free',
+    source: 'join',
   },
 ];
 
@@ -176,12 +183,6 @@ const testimonials = [
   },
 ];
 
-const footerLinks = {
-  company: ['About Us', 'Careers', 'Press & Media', 'Partner Program', 'Sustainability'],
-  products: ['Hotels & Resorts', 'Villas & Apartments', 'Flight + Hotel', 'Group Booking', 'StayEase Business'],
-  help: ['Help Center', 'Contact Support', 'Cancellation Policy', 'Privacy Policy', 'Terms & Conditions'],
-};
-
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const DOW = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
@@ -206,6 +207,12 @@ function toISODate(d) {
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
   return `${d.getFullYear()}-${month}-${day}`;
+}
+
+function fromISODate(value) {
+  if (!value) return null;
+  const [year, month, day] = value.split('-').map(Number);
+  return new Date(year, month - 1, day);
 }
 
 function formatDate(d) {
@@ -265,6 +272,10 @@ function MonthGrid({ offset, selected, setSelected }) {
 export default function Home() {
   const navigate = useNavigate();
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [scrolled, setScrolled] = useState(false);
   const [openField, setOpenField] = useState(null);
   const [location, setLocation] = useState(SEARCH_LOCATIONS[0].city);
@@ -273,6 +284,7 @@ export default function Home() {
   const [adults, setAdults] = useState(2);
   const [kids, setKids] = useState(0);
   const [rooms, setRooms] = useState(1);
+  const [quickDestination, setQuickDestination] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -324,19 +336,27 @@ export default function Home() {
       end.setDate(end.getDate() + 1);
     }
 
-    const mapped = LOCATION_REDIRECT[cityName] || cityName;
-
+    const matchedCity = SEARCH_LOCATIONS.find((item) => item.city.toLowerCase() === String(cityName || '').trim().toLowerCase())?.city;
     const params = new URLSearchParams();
-    if (mapped && mapped !== ALL_LOCATIONS) params.set('location', mapped);
+    if (matchedCity) {
+      params.set('location', matchedCity);
+    } else if (cityName && cityName !== ALL_LOCATIONS) {
+      params.set('query', String(cityName).trim());
+    }
     params.set('checkIn', toISODate(start));
     params.set('checkOut', toISODate(end));
     params.set('adults', String(Math.min(adults, 6)));
+    params.set('children', String(Math.min(kids, 6)));
     params.set('rooms', String(Math.min(rooms, 4)));
 
     navigate({ pathname: HOTEL_LIST_PATH, search: `?${params.toString()}` });
   };
 
   const handleSearch = () => goToHotels(location);
+  const handleQuickSearch = (event) => {
+    event.preventDefault();
+    goToHotels(quickDestination.trim() || location);
+  };
   return (
     <>
       <header className={`header ${scrolled || menuOpen ? 'scrolled' : ''}`}>
@@ -352,12 +372,13 @@ export default function Home() {
             <a href="#home" className="active">Home</a>
             <Link to="/about">About Us</Link>
             <Link to="/explore-destinations">Explore Destinations</Link>
-            <Link to={HOTEL_LIST_PATH}>Hotel List</Link>
-            <a href="#contact">Contact Us</a>
+            <Link to={HOTEL_LIST_PATH}>Hotels</Link>
+            <Link to="/contact">Contact Us</Link>
           </nav>
 
           <div className="header-actions">
-            <button className="btn-signup property-cta">Become a partner</button>
+            <Link to="/list-your-property" className="btn-signup property-cta">List your property</Link>
+            <Link to="/sign-in" className="btn-login sign-in-link"><UserRound size={16} aria-hidden="true" /> <span>Sign In</span></Link>
             <Link to="/AdminPanel" className="btn-login admin-panel-link">Admin Panel</Link>
             <button
               className="hamburger"
@@ -377,8 +398,10 @@ export default function Home() {
             <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
             <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
             <Link to="/explore-destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</Link>
-            <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotel List</Link>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
+            <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotels</Link>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+            <Link to="/sign-in" className="mobile-signin-link" onClick={() => setMenuOpen(false)}><UserRound size={16} aria-hidden="true" /> Sign In</Link>
+            <Link to="/AdminPanel" className="mobile-admin-link" onClick={() => setMenuOpen(false)}>Admin Panel</Link>
           </nav>
         )}
       </header>
@@ -529,10 +552,6 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="scroll-hint">
-          <div className="mouse" />
-          Scroll to explore
-        </div>
       </section>
 
       <section className="trip-zone" id="planner">
@@ -548,17 +567,43 @@ export default function Home() {
           <div className="trip-steps">
             {steps.map((s, i) => (
               <div className="step-card" key={s.title}>
-                <div className="step-img">
-                  <img src={s.img} alt={s.title} />
-                  <div className="step-num">0{i + 1}</div>
-                </div>
+                <Link className="step-img-link" to={s.to} aria-label={`${s.linkLabel}: ${s.title}`}>
+                  <div className="step-img">
+                    <img src={s.img} alt="" />
+                    <div className="step-num">0{i + 1}</div>
+                  </div>
+                </Link>
                 <div className="step-body">
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
                   <div className="step-dur"><Clock size={15} /> {s.dur}</div>
-                  <div className="step-link">Learn more <ArrowRight size={15} /></div>
+                  <Link className="step-link" to={s.to}>{s.linkLabel} <ArrowRight size={15} /></Link>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section home-destinations-section" aria-labelledby="home-destinations-title">
+        <div className="container">
+          <div className="section-head">
+            <span className="section-tag">Find your next stay</span>
+            <h2 className="section-title" id="home-destinations-title">Explore by <span className="hl">destination</span></h2>
+            <p className="section-desc">Browse stays in popular destinations and find the right place for your trip.</p>
+          </div>
+          <div className="home-destinations-grid">
+            {HOME_DESTINATIONS.map((destination) => (
+              <Link className="home-destination-card" key={destination.city} to={`${HOTEL_LIST_PATH}?location=${encodeURIComponent(destination.city)}`}>
+                <img src={destination.image} alt={`${destination.city}, ${destination.state}`} loading="lazy" decoding="async" />
+                <span className="home-destination-count">{destination.hotels} hotels</span>
+                <div className="home-destination-overlay" />
+                <div className="home-destination-info">
+                  <span>{destination.state}</span>
+                  <h3>{destination.city}</h3>
+                  <span className="home-destination-link">Explore stays <ArrowRight size={15} /></span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -578,7 +623,14 @@ export default function Home() {
             {hotels.map((h) => (
               <article className="hotel-card" key={h.name}>
                 <div className="hotel-img">
-                  <img src={h.img} alt={h.name} />
+                  <img
+                    src={h.img}
+                    alt={h.name}
+                    onError={h.city === 'Coimbatore' ? (event) => {
+                      event.currentTarget.onerror = null;
+                      event.currentTarget.src = hotels[1].img;
+                    } : undefined}
+                  />
                   <span className="hotel-badge">{h.badge}</span>
                   <div className="hotel-fav"><HeartIcon /></div>
                 </div>
@@ -617,9 +669,9 @@ export default function Home() {
       <section className="section" id="offers" style={{ paddingTop: 0 }}>
         <div className="container">
           <div className="section-head">
-            <span className="section-tag">Limited Time</span>
-            <h2 className="section-title">Deals & <span className="hl">Special Offers</span></h2>
-            <p className="section-desc">Save big with seasonal promotions, member-exclusive rates and flash deals.</p>
+            <span className="section-tag">Exclusive Offers</span>
+            <h2 className="section-title">Exclusive <span className="hl">Deals</span></h2>
+            <p className="section-desc">Explore member-only savings, seasonal escapes, and limited-time offers for your next stay.</p>
           </div>
 
           <div className="offers-grid">
@@ -631,7 +683,7 @@ export default function Home() {
                   <span className="otag">{o.tag}</span>
                   <h3>{o.title}</h3>
                   <p>{o.desc}</p>
-                  <button className="obtn" onClick={handleSearch}>{o.btn}</button>
+                  <Link className="obtn" to={`/customer-enquiry?source=${o.source}&offer=${encodeURIComponent(o.title)}`}>{o.btn}</Link>
                 </div>
               </div>
             ))}
@@ -688,106 +740,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="home-search-cta-section" aria-labelledby="home-search-cta-title">
         <div className="container">
-          <div className="cta-zone">
-            <div>
-              <span className="section-tag" style={{ background: 'rgba(255,255,255,0.2)', color: '#fff' }}>
-                Take us everywhere
-              </span>
-              <h2>Your Entire Trip, In Your Pocket</h2>
-              <p>Book, manage, check-in and get live concierge support from the StayEase app.</p>
-              <div className="cta-badges">
-                <a className="store-badge">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                  <div><div className="st-small">Download on the</div><div className="st-big">App Store</div></div>
-                </a>
-                <a className="store-badge">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12 3.84 21.85c-.5-.25-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.61 1.19s-.24.94-.6 1.2l-2.27 1.31-2.5-2.5 2.5-2.5 2.26 1.3zM6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z"/></svg>
-                  <div><div className="st-small">Get it on</div><div className="st-big">Google Play</div></div>
-                </a>
-              </div>
+          <div className="home-search-cta">
+            <div className="home-search-cta-copy">
+              <span className="section-tag">Stay Ease</span>
+              <h2 id="home-search-cta-title">What’s on your mind?</h2>
+              <p>Find your next stay across South India.</p>
             </div>
-            <div className="cta-mock">
-              <div className="phone">
-                <div className="phone-screen">
-                  <img src="https://images.pexels.com/photos/23696832/pexels-photo-23696832.jpeg?auto=compress&cs=tinysrgb&w=500" alt="App" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" style={{ paddingTop: 0, paddingBottom: 70 }}>
-        <div className="container">
-          <div className="newsletter">
-            <div>
-              <h3>Get Travel Deals First ✈️</h3>
-              <p>Subscribe for exclusive offers, member rates and week-ahead price alerts.</p>
-            </div>
-            <form className="news-form" onSubmit={(e) => { e.preventDefault(); alert('Subscribed! Watch your inbox for deals.'); }}>
-              <input type="email" placeholder="Enter your email address" required />
-              <button type="submit">Subscribe</button>
+            <form className="home-quick-search" onSubmit={handleQuickSearch}>
+              <label className="home-quick-search-input" htmlFor="home-quick-destination">
+                <MapPin size={19} aria-hidden="true" />
+                <input id="home-quick-destination" type="search" list="home-quick-destinations" placeholder="Where to?" value={quickDestination} onChange={(event) => setQuickDestination(event.target.value)} />
+                <datalist id="home-quick-destinations">{SEARCH_LOCATIONS.map((item) => <option key={item.city} value={item.city} />)}</datalist>
+              </label>
+              <label className="home-quick-date" htmlFor="home-quick-checkin"><span>Check-in</span><input id="home-quick-checkin" type="date" min={toISODate(startOfDay())} value={checkIn ? toISODate(checkIn) : ''} onChange={(event) => { const date = fromISODate(event.target.value); setCheckIn(date); if (date && checkOut && checkOut <= date) { const next = new Date(date); next.setDate(next.getDate() + 1); setCheckOut(next); } }} /></label>
+              <label className="home-quick-date" htmlFor="home-quick-checkout"><span>Check-out</span><input id="home-quick-checkout" type="date" min={checkIn ? toISODate(new Date(checkIn.getFullYear(), checkIn.getMonth(), checkIn.getDate() + 1)) : toISODate(startOfDay(1))} value={checkOut ? toISODate(checkOut) : ''} onChange={(event) => setCheckOut(fromISODate(event.target.value))} /></label>
+              <label className="home-quick-guests" htmlFor="home-quick-guests"><Users size={17} aria-hidden="true" /><select id="home-quick-guests" value={Math.min(totalGuests, 6)} onChange={(event) => { setAdults(Number(event.target.value)); setKids(0); }}>{[1, 2, 3, 4, 5, 6].map((count) => <option key={count} value={count}>{count} {count === 1 ? 'Guest' : 'Guests'}</option>)}</select></label>
+              <label className="home-quick-rooms" htmlFor="home-quick-rooms"><select id="home-quick-rooms" aria-label="Rooms" value={rooms} onChange={(event) => setRooms(Number(event.target.value))}>{[1, 2, 3, 4].map((count) => <option key={count} value={count}>{count} {count === 1 ? 'Room' : 'Rooms'}</option>)}</select></label>
+              <button className="home-quick-search-button" type="submit"><Search size={17} /> Search</button>
+              <a className="home-whatsapp-cta" href="https://wa.me/918005550199?text=Hi%20Stay%20Ease%2C%20I%20need%20help%20planning%20a%20stay." target="_blank" rel="noopener noreferrer" aria-label="Chat with Stay Ease on WhatsApp">
+                <MessageCircle size={19} aria-hidden="true" /> <span>Chat on WhatsApp</span>
+              </a>
             </form>
           </div>
         </div>
       </section>
 
-      <footer className="footer" id="contact">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="brand">
-                <div className="logo-badge"><Building2 size={22} /></div>
-                Stay<em>Ease</em>
-              </div>
-              <p className="footer-about">
-                StayEase connects travelers to verified properties with best-price guarantees, instant confirmation and 24/7 support.
-              </p>
-              <div className="footer-social">
-                <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10h3l.5-3H13V5.5c0-.9.3-1.5 1.6-1.5H17V1.2C16.6 1.1 15.6 1 14.6 1 12 1 10.3 2.5 10.3 5.2V7H7v3h3.3v9H13v-9z"/></svg></a>
-                <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-                <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6A11.4 11.4 0 0 1 3.8 4.6a4 4 0 0 0 1.2 5.3c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 3.9c-.6.2-1.2.2-1.8.1a4 4 0 0 0 3.7 2.8A8 8 0 0 1 2 18.6a11.3 11.3 0 0 0 6.1 1.8c7.4 0 11.4-6.1 11.4-11.4v-.5c.8-.6 1.5-1.3 2-2.2z"/></svg></a>
-              </div>
-            </div>
-
-            <div>
-              <h5>Company</h5>
-              <ul className="footer-links">
-                {footerLinks.company.map((l) => <li key={l}>{l === 'About Us' ? <Link to="/about">{l}</Link> : <a href="#">{l}</a>}</li>)}
-              </ul>
-            </div>
-
-            <div>
-              <h5>Explore</h5>
-              <ul className="footer-links">
-                {footerLinks.products.map((l) => <li key={l}><a href="#">{l}</a></li>)}
-              </ul>
-            </div>
-
-            <div>
-              <h5>Get in Touch</h5>
-              <ul className="footer-contact">
-                <li><Phone size={16} /> +91 80055 50199</li>
-                <li><Mail size={16} /> support@stayease.com</li>
-                <li><Pin size={16} /> 100 Harbor Point, Suite 500<br />Bengaluru, India</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <span>© {new Date().getFullYear()} StayEase Travel Ltd. All rights reserved.</span>
-            <div className="pay">
-              We accept
-              <span className="pay-chip">VISA</span>
-              <span className="pay-chip">Mastercard</span>
-              <span className="pay-chip">UPI</span>
-              <span className="pay-chip">PayPal</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <AboutFooter activePage="home" />
     </>
   );
 }

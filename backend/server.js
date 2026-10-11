@@ -6,6 +6,8 @@ const cors = require('cors');
 const path = require('path');
 
 const hotelRoutes = require('./routes/adminpanel');
+const propertyEnquiryRoutes = require('./routes/propertyEnquiries');
+const customerEnquiryRoutes = require('./routes/customerEnquiries');
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Hotel routes
 app.use('/api/hotels', hotelRoutes);
+app.use('/api/property-enquiries', propertyEnquiryRoutes);
+app.use('/api/customer-enquiries', customerEnquiryRoutes);
 
 app.get('/', (req, res) => {
   res.send('TravelNest Admin API is running');

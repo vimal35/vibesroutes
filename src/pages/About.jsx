@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Eye, Target, ArrowRight, Phone, Mail, MapPin, Heart, Compass, RefreshCw } from 'lucide-react';
+import { Building2, Eye, Target, ArrowRight, Phone, Mail, MapPin, Heart, Compass, RefreshCw, UserRound } from 'lucide-react';
 import './Home.css';
 import './About.css';
 
@@ -34,48 +34,50 @@ export function AboutFooter({ activePage = 'about' }) {
     <footer className="footer" id="contact">
       <div className="container">
         <div className="footer-grid">
-          <div>
-            <Link to="/" className="brand">
-              <div className="logo-badge"><Building2 size={22} /></div>
+          <div className="footer-brand-column">
+            <Link to="/" className="brand footer-brand">
+              <span className="logo-badge"><Building2 size={22} /></span>
               <span className="brand-name">Stay<em>Ease</em></span>
             </Link>
-            <p className="footer-about">StayEase connects travelers to verified properties with best-price guarantees, instant confirmation and 24/7 support.</p>
-            <div className="footer-social">
+            <p className="footer-about">Stay Ease makes it easier to discover welcoming hotels, villas, and resorts across South India, helping you find a stay that fits your journey.</p>
+          </div>
+          <div>
+            <h5>GET IN TOUCH</h5>
+            <ul className="footer-contact">
+              <li><MapPin size={17} /><span>100 Harbor Point, Suite 500<br />Bengaluru, India</span></li>
+              <li><Mail size={17} /><a href="mailto:support@stayease.com">support@stayease.com</a></li>
+              <li><Phone size={17} /><a href="tel:+918005550199">+91 80055 50199</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>EXPLORE</h5>
+            <ul className="footer-links">
+              <li><Link to="/" aria-current={activePage === 'home' ? 'page' : undefined}>Home</Link></li>
+              <li><Link to="/about" aria-current={activePage === 'about' ? 'page' : undefined}>About</Link></li>
+              <li><Link to="/explore-destinations" aria-current={activePage === 'destinations' ? 'page' : undefined}>Explore Destinations</Link></li>
+              <li><Link to={HOTEL_LIST_PATH}>Hotels</Link></li>
+              <li><Link to="/list-your-property">List Your Property</Link></li>
+              <li><Link to="/contact" aria-current={activePage === 'contact' ? 'page' : undefined}>Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5>OFFICE TIME</h5>
+            <p className="footer-hours">Operating Hours:<br /><strong>24/7 Monday to Sunday</strong></p>
+            <div className="footer-social" aria-label="Social media">
               <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10h3l.5-3H13V5.5c0-.9.3-1.5 1.6-1.5H17V1.2C16.6 1.1 15.6 1 14.6 1 12 1 10.3 2.5 10.3 5.2V7H7v3h3.3v9H13v-9z" /></svg></a>
               <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg></a>
-              <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6A11.4 11.4 0 0 1 3.8 4.6a4 4 0 0 0 1.2 5.3c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 3.9c-.6.2-1.2.2-1.8.1a4 4 0 0 0 3.7 2.8A8 8 0 0 1 2 18.6a11.3 11.3 0 0 0 6.1 1.8c7.4 0 11.4-6.1 11.4-11.4v-.5c.8-.6 1.5-1.3 2-2.2z" /></svg></a>
+              <a href="#" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.2h3.7l-8.1 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9Zm-1.3 19.7h2L6.5 3.1H4.3l13.3 17.8Z" /></svg></a>
             </div>
-          </div>
-          <div>
-            <h5>Company</h5>
-            <ul className="footer-links">
-              <li><Link to="/about" aria-current={activePage === 'about' ? 'page' : undefined}>About Us</Link></li>
-              <li><a href="#">Careers</a></li><li><a href="#">Press &amp; Media</a></li>
-              <li><a href="#">Partner Program</a></li><li><a href="#">Sustainability</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5>Explore</h5>
-            <ul className="footer-links">
-              <li><Link to="/explore-destinations">Explore Destinations</Link></li>
-              <li><Link to={HOTEL_LIST_PATH}>Hotels &amp; Resorts</Link></li>
-              <li><Link to={HOTEL_LIST_PATH}>Villas &amp; Apartments</Link></li>
-              <li><a href="#">Flight + Hotel</a></li><li><a href="#">Group Booking</a></li>
-              <li><a href="#">StayEase Business</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5>Get in Touch</h5>
-            <ul className="footer-contact">
-              <li><Phone size={16} /> +91 80055 50199</li>
-              <li><Mail size={16} /> support@stayease.com</li>
-              <li><MapPin size={16} /> 100 Harbor Point, Suite 500<br />Bengaluru, India</li>
-            </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} StayEase Travel Ltd. All rights reserved.</span>
-          <div className="pay">We accept <span className="pay-chip">VISA</span><span className="pay-chip">Mastercard</span><span className="pay-chip">UPI</span><span className="pay-chip">PayPal</span></div>
+          <span className="footer-credit">Designed and developed by <a href="https://adlinkwebservices.in/" target="_blank" rel="noopener noreferrer">Adlink web services</a> <span aria-hidden="true">/</span> <Link to="/AdminPanel">Admin Panel</Link></span>
+          <nav className="footer-policy-links" aria-label="Policies">
+            <Link to="/refund-policy">Refund Policy</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>
+            <Link to="/cancellation-policy">Cancellation Policy</Link>
+          </nav>
         </div>
       </div>
     </footer>
@@ -95,11 +97,12 @@ export function SitePageHeader({ activePage }) {
           <Link to="/">Home</Link>
           <Link to="/about" className={aboutLinkClass} aria-current={activePage === 'about' ? 'page' : undefined}>About Us</Link>
           <Link to="/explore-destinations" className={destinationsLinkClass} aria-current={activePage === 'destinations' ? 'page' : undefined}>Explore Destinations</Link>
-          <Link to={HOTEL_LIST_PATH}>Hotel List</Link>
-          <Link to="/#contact">Contact Us</Link>
+          <Link to={HOTEL_LIST_PATH}>Hotels</Link>
+          <Link to="/contact" className={activePage === 'contact' ? 'active' : ''} aria-current={activePage === 'contact' ? 'page' : undefined}>Contact Us</Link>
         </nav>
         <div className="header-actions">
-          <Link to={HOTEL_LIST_PATH} className="btn-signup property-cta">List your property</Link>
+          <Link to="/list-your-property" className="btn-signup property-cta">List your property</Link>
+          <Link to="/sign-in" className="btn-login sign-in-link" aria-current={activePage === 'sign-in' ? 'page' : undefined}><UserRound size={16} aria-hidden="true" /> <span>Sign In</span></Link>
           <Link to="/AdminPanel" className="btn-login admin-panel-link">Admin Panel</Link>
           <button className="hamburger" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="page-mobile-navigation">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
@@ -113,8 +116,10 @@ export function SitePageHeader({ activePage }) {
           <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
           <Link to="/explore-destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</Link>
-          <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotel List</Link>
-          <Link to="/#contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+          <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotels</Link>
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+          <Link to="/sign-in" onClick={() => setMenuOpen(false)}><UserRound size={16} aria-hidden="true" /> Sign In</Link>
+          <Link to="/AdminPanel" className="mobile-admin-link" onClick={() => setMenuOpen(false)}>Admin Panel</Link>
         </nav>
       )}
     </header>
@@ -123,6 +128,10 @@ export function SitePageHeader({ activePage }) {
 
 export default function About() {
   const [imageIndex, setImageIndex] = useState(0);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     aboutImages.forEach(({ img }) => {
