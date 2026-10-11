@@ -6,7 +6,7 @@ import './Home.css';
 
 import {
   Building2, MapPin, CalendarDays, Search, ChevronDown, Users,
-  ShieldCheck, Wifi, Headphones, Wallet, Plane, Phone,
+  ShieldCheck, Headphones, Wallet, Plane, Phone,
   Mail, MapPin as Pin, Globe, CreditCard, Sparkles, ArrowRight, ArrowUpRight,
   Bell, Ticket, Banknote, Quote, Clock,
 } from 'lucide-react';
@@ -36,53 +36,88 @@ const LOCATION_REDIRECT = {
 
 const destinations = [
   {
-    city: 'Pondicherry',
-    country: 'Tamil Nadu',
-    img: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=900&q=80',
-    hotels: 15,
-    deals: 6,
-    start: 2800,
-  },
-  {
-    city: 'Bangalore',
-    country: 'Karnataka',
-    img: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=900&q=80',
-    hotels: 15,
-    deals: 8,
-    start: 4200,
-    tall: true,
-  },
-  {
-    city: 'Kerala',
-    country: 'God’s Own Country',
-    img: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=80',
-    hotels: 15,
-    deals: 7,
-    start: 3200,
-  },
-  {
-    city: 'Goa',
-    country: 'West Coast',
-    img: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80',
-    hotels: 18,
-    deals: 9,
-    start: 4500,
-  },
-  {
     city: 'Ooty',
-    country: 'Tamil Nadu',
-    img: 'https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=900&q=80',
-    hotels: 15,
-    deals: 5,
-    start: 3000,
+    region: 'Tamil Nadu',
+    description: 'Tea gardens, cool Nilgiri air, and scenic hill roads.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ooty%20Th%C3%A9%20Plantation.JPG?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Ooty_Th%C3%A9_Plantation.JPG',
+    credit: 'Harrieta171',
+    license: 'CC BY-SA',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    hotelCity: 'Ooty',
   },
   {
-    city: 'Coimbatore',
-    country: 'Tamil Nadu',
-    img: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=900&q=80',
-    hotels: 15,
-    deals: 4,
-    start: 2400,
+    city: 'Kodaikanal',
+    region: 'Tamil Nadu',
+    description: 'A peaceful hill town centered around its star-shaped lake.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kodaikanal-lake.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Kodaikanal-lake.jpg',
+    credit: 'युकेश',
+    license: 'Public domain',
+    licenseUrl: 'https://commons.wikimedia.org/wiki/File:Kodaikanal-lake.jpg',
+  },
+  {
+    city: 'Munnar',
+    region: 'Kerala',
+    description: 'Rolling tea estates and cool highland scenery in the Western Ghats.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tea%20Estate%20in%20Munnar.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Tea_Estate_in_Munnar.jpg',
+    credit: 'Kps',
+    license: 'Public domain',
+    licenseUrl: 'https://commons.wikimedia.org/wiki/File:Tea_Estate_in_Munnar.jpg',
+    hotelCity: 'Munnar',
+  },
+  {
+    city: 'Alleppey',
+    region: 'Kerala',
+    description: 'Quiet canals and houseboat routes through the Kerala backwaters.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Alleppey_backwaters.1.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Alleppey_backwaters.1.jpg',
+    credit: 'Sravanbaddi',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    city: 'Coorg',
+    region: 'Karnataka',
+    description: 'Coffee-growing hills, forest paths, and monsoon-fed waterfalls.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20Plantation%20in%20Coorg..jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Coffee_Plantation_in_Coorg..jpg',
+    credit: 'Rudolph A. Furtado',
+    license: 'CC0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  },
+  {
+    city: 'Mysuru',
+    region: 'Karnataka',
+    description: 'A heritage city known for its palace and historic streets.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mysore%20palace%20front%20view%20001.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Mysore_palace_front_view_001.jpg',
+    credit: 'Rijin S',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  {
+    city: 'Pondicherry',
+    region: 'Puducherry',
+    description: 'French Quarter lanes meet a breezy Bay of Bengal promenade.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/French%20Quarter%20in%20Pondicherry%20%285%29%20%2823662220798%29.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:French_Quarter_in_Pondicherry_(5)_(23662220798).jpg',
+    credit: 'Richard Mortel',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    hotelCity: 'Pondicherry',
+  },
+  {
+    city: 'Hyderabad',
+    region: 'Telangana',
+    description: 'Explore the Charminar, historic bazaars, and Deccan culture.',
+    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic%20View%20of%20the%20Charminar%2C%20Hyderabad.jpg?width=960',
+    source: 'https://commons.wikimedia.org/wiki/File:Panoramic_View_of_the_Charminar,_Hyderabad.jpg',
+    credit: 'Preeti Prajapati',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    hotelCity: 'Hyderabad',
   },
 ];
 
@@ -389,7 +424,14 @@ export default function Home() {
   };
 
   const handleSearch = () => goToHotels(location);
+  const exploreDestination = (destination) => {
+    if (destination.hotelCity) {
+      goToHotels(destination.hotelCity);
+      return;
+    }
 
+    navigate(HOTEL_LIST_PATH);
+  };
   return (
     <>
       <header className={`header ${scrolled || menuOpen ? 'scrolled' : ''}`}>
@@ -398,26 +440,42 @@ export default function Home() {
             <div className="logo-badge">
               <Building2 size={22} />
             </div>
-            Stay<em>Ease</em>
+            <span className="brand-name">Stay<em>Ease</em></span>
           </Link>
 
-          <nav className="nav-links">
+          <nav className="nav-links" aria-label="Main navigation">
             <a href="#home" className="active">Home</a>
-            <a href="#hotels">Hotels</a>
-            <a href="#contact">Contact</a>
+            <Link to="/about">About Us</Link>
+            <a href="#destinations">Explore Destinations</a>
+            <a href="#contact">Contact Us</a>
             <Link to={HOTEL_LIST_PATH}>Hotel List</Link>
           </nav>
 
           <div className="header-actions">
-            <Link to="/AdminPanel" className="btn-login">Admin Panel</Link>
-            <button className="btn-signup">Become a partner</button>
-            <button className="hamburger" onClick={() => setMenuOpen((o) => !o)} aria-label="Menu">
+            <button className="btn-signup property-cta">Become a partner</button>
+            <Link to="/AdminPanel" className="btn-login admin-panel-link">Admin Panel</Link>
+            <button
+              className="hamburger"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+            >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                 {menuOpen ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
               </svg>
             </button>
           </div>
         </div>
+        {menuOpen && (
+          <nav className="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+            <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+            <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
+            <a href="#destinations" onClick={() => setMenuOpen(false)}>Explore Destinations</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
+            <Link to={HOTEL_LIST_PATH} onClick={() => setMenuOpen(false)}>Hotel List</Link>
+          </nav>
+        )}
       </header>
 
       <section className="hero" id="home">
@@ -572,38 +630,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="destinations">
+      <section className="section" id="destinations" aria-labelledby="destinations-title">
         <div className="container">
           <div className="section-head">
             <span className="section-tag">Explore South India</span>
-            <h2 className="section-title">Popular Destinations <span className="hl">By Locale</span></h2>
+            <h2 className="section-title" id="destinations-title">Explore <span className="hl">Destinations</span></h2>
             <p className="section-desc">
-              Handpicked cities loved by our travelers, with real-time hotel availability and exclusive local deals.
+              Find inspiration for your next trip, from Nilgiri tea gardens to Kerala backwaters and historic city streets.
             </p>
           </div>
 
           <div className="dest-grid dest-grid-six">
             {destinations.map((d) => (
-              <button
-                key={d.city}
-                className={`dest-card ${d.tall ? 'tall' : ''}`}
-                onClick={() => goToHotels(d.city)}
-              >
-                <img src={d.img} alt={d.city} />
+              <article key={d.city} className="dest-card">
+                <img src={d.img} alt={`${d.city} - ${d.region}`} loading="lazy" decoding="async" />
                 <div className="overlay" />
                 <div className="info">
-                  <div className="city">
-                    {d.city}
-                    <span className="arrow"><ArrowUpRight size={18} /></span>
-                  </div>
-                  <div className="country">{d.country}</div>
-                  <div className="meta">
-                    <span><b>{d.hotels}</b> stays</span>
-                    <span><b>{d.deals}</b> deals</span>
-                    <span>from <b>₹{d.start.toLocaleString('en-IN')}</b></span>
-                  </div>
+                  <div className="city">{d.city}</div>
+                  <div className="country">{d.region}</div>
+                  <p className="dest-description">{d.description}</p>
+                  <button className="dest-explore" onClick={() => exploreDestination(d)}>
+                    Explore stays <ArrowUpRight size={16} />
+                  </button>
                 </div>
-              </button>
+                <div className="dest-credit" aria-label={`Photo by ${d.credit}`}>
+                  <a href={d.source} target="_blank" rel="noreferrer">Photo: {d.credit}</a>
+                  <span aria-hidden="true"> | </span>
+                  <a href={d.licenseUrl} target="_blank" rel="noreferrer">{d.license}</a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
@@ -829,7 +884,7 @@ export default function Home() {
             <div>
               <h5>Company</h5>
               <ul className="footer-links">
-                {footerLinks.company.map((l) => <li key={l}><a href="#">{l}</a></li>)}
+                {footerLinks.company.map((l) => <li key={l}>{l === 'About Us' ? <Link to="/about">{l}</Link> : <a href="#">{l}</a>}</li>)}
               </ul>
             </div>
 
