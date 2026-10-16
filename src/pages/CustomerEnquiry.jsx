@@ -7,8 +7,8 @@ import './CustomerEnquiry.css';
 
 const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
 const OFFER_CONTEXT = {
-  deal: { title: 'Early Summer Escapes', label: 'Grab the Deal' },
-  join: { title: 'Book + Save Extra 15%', label: 'Join for Free' },
+  'coastal-and-hills': { title: 'A change of scenery', label: 'Travel inspiration' },
+  'trip-planning': { title: 'Start with what matters', label: 'Plan your way' },
 };
 
 const emptyForm = {
@@ -131,9 +131,9 @@ export default function CustomerEnquiry() {
       <main>
         <section className="customer-enquiry-hero">
           <div className="container">
-            <span className="section-tag">PLAN YOUR NEXT STAY</span>
-            <h1>Let's Find Your <span className="hl">Perfect Stay.</span></h1>
-            <p>Tell us a little about your travel plans, and let us help you take the next step towards your stay. Share your details, preferred location, and travel dates so we can understand what you're looking for.</p>
+            <span className="section-tag">Tell us where you want to go</span>
+            <h1>Let’s shape the <span className="hl">next step.</span></h1>
+            <p>Share your preferred destination and dates, along with any questions or preferences. This form sends a travel enquiry; it does not reserve a stay.</p>
             {offerContext.title && <div className="customer-offer-context"><span>{offerContext.label}</span><strong>{offerContext.title}</strong></div>}
           </div>
         </section>
@@ -143,13 +143,13 @@ export default function CustomerEnquiry() {
             <aside className="customer-enquiry-aside">
               <span className="customer-aside-icon"><MessageCircle size={22} /></span>
               <h2>Start with the details that matter to your trip.</h2>
-              <p>This is a travel enquiry, not a confirmed booking. Our team will use the information you share to understand what you’re looking for.</p>
+              <p>This form sends a travel enquiry, not a reservation. It does not confirm availability or book a stay.</p>
               <div className="customer-aside-points">
                 <span><UserRound size={17} /> Your contact details</span>
                 <span><MapPin size={17} /> Where you’d like to stay</span>
                 <span><CalendarDays size={17} /> When you plan to travel</span>
               </div>
-              <p className="customer-privacy-note"><ShieldCheck size={16} /> Your information will be used to handle this travel enquiry. See our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
+              <p className="customer-privacy-note"><ShieldCheck size={16} /> <span>Your information will be used to handle this travel enquiry. See our <Link to="/privacy-policy">Privacy Policy</Link>.</span></p>
             </aside>
 
             <div className="customer-enquiry-card">
@@ -157,7 +157,7 @@ export default function CustomerEnquiry() {
                 <div className="customer-success" role="status" aria-live="polite">
                   <span><CheckCircle2 size={30} /></span>
                   <h2>Your Enquiry Has Been Received!</h2>
-                  <p>Thank you for choosing Stay Ease. We've received your travel enquiry and will use the details you provided to help with your next steps.</p>
+                  <p>Thanks for reaching out to VibezRoutes. Your travel enquiry was received, and the details you shared can now be reviewed.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
@@ -203,7 +203,7 @@ export default function CustomerEnquiry() {
                   </div>
                   {submitStatus.message && <div className="customer-submit-status error" role="alert">{submitStatus.message}</div>}
                   <button className="btn-signup customer-submit" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Submitting…' : 'Submit Enquiry'} <ArrowRight size={17} /></button>
-                  <p className="customer-form-privacy">By submitting, you’re asking Stay Ease to use these details to handle your travel enquiry. Read our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
+                  <p className="customer-form-privacy">By submitting, you’re asking VibezRoutes to use these details to handle your travel enquiry. Read our <Link to="/privacy-policy">Privacy Policy</Link>.</p>
                 </form>
               )}
             </div>

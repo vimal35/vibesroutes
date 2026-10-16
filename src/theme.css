@@ -1,0 +1,747 @@
+/* ==========================================================================
+   VibezRoutes theme — Forest Green palette
+   Main      #12453A  (forest)
+   Secondary #8BA888  (sage)
+   Accent 1  #E8F1E9  (pale sage)
+   Accent 2  #F4E9D8  (warm beige)
+
+   Rule of thumb: dark text (forest / --muted) on light surfaces,
+   light text (white / beige / pale sage) on forest surfaces.
+   This file is imported last, so it overrides the page stylesheets.
+   ========================================================================== */
+
+:root {
+  --forest: #12453a;
+  --forest-deep: #0d312d;
+  --sage: #8ba888;
+  --sage-grey: #8ba888;
+  --sage-grey-soft: rgba(139, 168, 136, 0.18);
+  --pale-sage: #e8f1e9;
+  --warm-beige: #f4e9d8;
+  --white: #ffffff;
+  --navy: #12453a;
+  --navy-2: #0d312d;
+  --navy-3: #0a2c28;
+  --blue: #12453a;
+  --blue-dark: #0d312d;
+  --blue-2: #245e50;
+  --blue-soft: #e8f1e9;
+  /* "gold" is the highlight colour used on forest surfaces (header, footer,
+     dark sections, image overlays), so it must be light. */
+  --gold: #f4e9d8;
+  --gold-2: #e8f1e9;
+  --text: #12453a;
+  /* readable secondary text on beige / pale sage / white */
+  --muted: #55665e;
+  --muted-2: #55665e;
+  --line: rgba(139, 168, 136, 0.42);
+  --bg: #f4e9d8;
+  --card: #ffffff;
+  --grad: linear-gradient(135deg, #12453a 0%, #245e50 100%);
+  --site-header-h: 70px;
+}
+
+body {
+  color: #12453a;
+  background: #f4e9d8;
+}
+
+.header.scrolled {
+  background: rgba(18, 69, 58, 0.96);
+}
+
+.footer,
+.hl-footer {
+  background: #12453a;
+}
+
+.section-tag {
+  color: #12453a;
+  background: rgba(18, 69, 58, 0.09);
+}
+
+.section-title,
+.section-title .hl {
+  color: #12453a;
+}
+
+.section-desc {
+  color: var(--muted);
+}
+
+/* ---------- page surfaces ---------- */
+
+.about-page,
+.explore-destinations-page,
+.contact-page,
+.customer-enquiry-page,
+.policy-page,
+.property-page,
+.signin-page {
+  background: #f4e9d8;
+}
+
+.explore-story-section,
+.contact-hero,
+.contact-faq-section,
+.customer-enquiry-hero,
+.policy-content-section,
+.property-hero,
+.property-enquiry-section {
+  background: #e8f1e9;
+}
+
+.explore-destinations-section,
+.explore-themes-section,
+.contact-story-section,
+.customer-enquiry-section,
+.property-benefits,
+.signin-main {
+  background: #f4e9d8;
+}
+
+/* sections that sit next to a different-coloured section need their own top
+   spacing, otherwise the label touches the colour edge */
+.explore-themes-section {
+  padding-top: 86px;
+}
+
+.explore-hero,
+.policy-hero,
+.customer-enquiry-aside,
+.property-process-section,
+.contact-final-cta {
+  color: #fff;
+  background: linear-gradient(130deg, #12453a 0%, #1b5a4b 100%);
+}
+
+.explore-hero-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(18, 69, 58, 0.88),
+    rgba(18, 69, 58, 0.56) 48%,
+    rgba(18, 69, 58, 0.12)
+  );
+}
+
+.explore-hero-label,
+.property-process-note,
+.property-process-intro h2 .hl,
+.property-step-marker,
+.property-caption-icon,
+.customer-aside-icon,
+.customer-aside-points svg,
+.customer-privacy-note svg,
+.contact-final-icon {
+  color: #f4e9d8;
+}
+
+.contact-hero::before {
+  background: radial-gradient(circle, rgba(18, 69, 58, 0.1), transparent 70%);
+}
+
+.contact-eyebrow,
+.contact-hero h1 .hl,
+.property-eyebrow,
+.property-hero h1 > span,
+.property-benefit-icon,
+.property-form-heading > span,
+.customer-enquiry-hero .section-tag,
+.customer-enquiry-hero h1 .hl,
+.customer-success > span {
+  color: #12453a;
+}
+
+/* small dots next to eyebrow labels on light backgrounds */
+.contact-eyebrow > span,
+.property-eyebrow > span {
+  background: #12453a;
+  box-shadow: 0 0 0 5px rgba(18, 69, 58, 0.14);
+}
+
+.signin-topline > .section-tag,
+.signin-brand-mark em,
+.signin-form-panel h1 .hl {
+  color: #12453a;
+}
+
+/* ---------- light text on forest surfaces ---------- */
+
+/* Home: "From daydream to next steps" sits on a forest gradient */
+.home-page .trip-zone .section-tag {
+  color: #f4e9d8;
+  background: rgba(244, 233, 216, 0.14);
+}
+
+.home-page .trip-zone .section-title {
+  color: #fff;
+}
+
+.home-page .trip-zone .section-desc {
+  color: #e8f1e9;
+}
+
+.home-page .home-search-cta-copy .section-tag {
+  color: #f4e9d8;
+  background: rgba(244, 233, 216, 0.16);
+  border: 1px solid rgba(244, 233, 216, 0.28);
+}
+
+.home-search-cta-copy p {
+  color: #e8f1e9;
+}
+
+/* Footer */
+.footer-about,
+.footer-contact,
+.footer-contact li,
+.footer-contact a,
+.footer-links a,
+.footer-policy-links a,
+.footer-credit {
+  color: #e8f1e9;
+}
+
+.footer-links a:hover,
+.footer-policy-links a:hover,
+.footer-contact a:hover,
+.footer-credit a:hover {
+  color: #fff;
+}
+
+.footer-credit a {
+  color: #f4e9d8;
+}
+
+/* Image captions and overlays */
+.offer-card p,
+.dest-card .country,
+.dest-card .dest-description,
+.contact-final-cta p,
+.property-process-intro > p,
+.property-step p,
+.property-image-caption small {
+  color: #e8f1e9;
+}
+
+.contact-hero-visual::after,
+.property-hero-image::after {
+  background: linear-gradient(transparent, rgba(13, 49, 45, 0.6));
+}
+
+.contact-hero-badge,
+.property-image-caption {
+  background: rgba(13, 49, 45, 0.55);
+}
+
+.contact-hero-visual,
+.property-hero-image {
+  background: #e8f1e9;
+}
+
+.property-step-marker > span {
+  color: #12453a;
+  background: #f4e9d8;
+}
+
+.signin-visual {
+  background-color: #12453a;
+}
+
+.signin-visual-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(13, 49, 45, 0.05) 10%,
+    rgba(13, 49, 45, 0.82) 100%
+  );
+}
+
+.signin-visual-copy span {
+  color: #f4e9d8;
+}
+
+/* ---------- buttons ---------- */
+
+/* Header "List your property": raised green gradient button */
+.btn-signup.property-cta {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, #3f8d71 0%, #22684f 55%, #18533f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 4px 0 #0a2a22,
+    0 10px 20px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.btn-signup.property-cta:hover {
+  color: #fff;
+  background: linear-gradient(180deg, #3f8d71 0%, #22684f 55%, #18533f 100%);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 5px 0 #0a2a22,
+    0 14px 24px rgba(0, 0, 0, 0.32);
+}
+
+.btn-signup.property-cta:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 1px 0 #0a2a22,
+    0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Primary buttons that sat on a matching dark photo or light card */
+.explore-hero-cta {
+  background: #f4e9d8;
+  color: #12453a;
+}
+
+.explore-hero-cta:hover {
+  background: #fff;
+}
+
+.property-hero-cta,
+.property-submit,
+.property-hero-cta:hover,
+.property-submit:hover {
+  background: var(--grad);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 8px 18px rgba(18, 69, 58, 0.2);
+}
+
+.contact-final-cta .btn-signup {
+  background: #f4e9d8;
+  color: #12453a;
+}
+
+/* ---------- small light-surface fixes ---------- */
+
+.property-benefit-number {
+  color: #8ba888;
+}
+
+.property-benefit-icon,
+.property-form-heading > span,
+.contact-info-icon {
+  background: #e8f1e9;
+}
+
+.signin-brand-mark .logo-badge {
+  border-radius: 12px;
+  background: var(--grad);
+}
+
+/* links and checkboxes inside the white sign-in / sign-up card */
+.signin-page .signin-help a,
+.signin-page .signin-signup a,
+.signin-page .signin-contact-link,
+.signin-page .signin-checkbox a {
+  color: #12453a;
+  text-decoration: underline;
+  text-decoration-color: rgba(18, 69, 58, 0.35);
+}
+
+.signin-page .signin-help a:hover,
+.signin-page .signin-signup a:hover,
+.signin-page .signin-checkbox a:hover {
+  color: #245e50;
+  text-decoration-color: currentColor;
+}
+
+.signin-page input[type="checkbox"] {
+  accent-color: #12453a;
+}
+
+.property-benefit-number {
+  color: #5f7d5c;
+}
+
+.dp-review-date {
+  color: var(--muted);
+}
+
+/* header links on every page */
+.nav-links a {
+  color: #e8f1e9;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+}
+
+/* The hotel pages reset every link to "inherit" their forest text colour,
+   which made the shared header and footer text disappear. */
+.hl-app .header,
+.dp-app .header,
+.hl-app .footer .brand,
+.dp-app .footer .brand {
+  color: #fff;
+}
+
+.hl-app .footer,
+.dp-app .footer {
+  color: #e8f1e9;
+}
+
+.hl-app .header,
+.dp-app .header,
+.hl-app .footer,
+.dp-app .footer {
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------- layout fixes ---------- */
+
+/* Boxes that also carry .container: keep them inside the page gutter
+   instead of stretching to the container's outer edge. */
+.signin-layout.container,
+.contact-final-cta.container {
+  width: calc(100% - 32px);
+  max-width: 1192px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.contact-final-cta.container {
+  padding: 28px 32px;
+}
+
+@media (max-width: 760px) {
+  .contact-final-cta.container {
+    padding: 23px 20px;
+  }
+}
+
+.customer-privacy-note > span {
+  min-width: 0;
+}
+
+/* ---------- hotel list / detail ---------- */
+
+.hl-app,
+.dp-app {
+  --navy: #12453a;
+  --navy-2: #0e3b32;
+  --blue: #12453a;
+  --blue-dark: #0e3b32;
+  --blue-soft: #e8f1e9;
+  --green: #12453a;
+  --green-soft: #e8f1e9;
+  --amber: #8ba888;
+  --ink: #12453a;
+  --sub: #55665e;
+  --line: rgba(139, 168, 136, 0.42);
+  --bg: #f4e9d8;
+}
+
+/* the shared site header is fixed; leave room for it */
+.hl-app,
+.dp-app {
+  padding-top: var(--site-header-h);
+}
+
+.hl-searchwrap,
+.dp-subnav {
+  top: var(--site-header-h);
+}
+
+.hl-side {
+  top: calc(var(--site-header-h) + 96px);
+}
+
+.dp-widget {
+  top: calc(var(--site-header-h) + 76px);
+}
+
+.hl-hero {
+  background: linear-gradient(130deg, #12453a 0%, #1b5a4b 100%);
+}
+
+.hl-main,
+.dp-main {
+  background: #f4e9d8;
+}
+
+.hl-header,
+.dp-header {
+  background: linear-gradient(120deg, #12453a 0%, #0e3b32 100%);
+}
+
+.dp-subnav,
+.hl-toolbar,
+.hl-searchwrap {
+  background: #e8f1e9;
+}
+
+/* Main call-to-action on hotel cards and the booking widget */
+.hl-app .hl-card-cta,
+.dp-app .dp-widget-btn {
+  color: #fff;
+  border: 0;
+  background: linear-gradient(135deg, #2c7a60 0%, #1b5a4b 45%, #12453a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 22px rgba(18, 69, 58, 0.28);
+}
+
+.hl-app .hl-card-cta:hover,
+.dp-app .dp-widget-btn:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #2c7a60 0%, #1b5a4b 45%, #12453a 100%);
+  filter: brightness(1.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 14px 28px rgba(18, 69, 58, 0.34);
+}
+
+.hl-app .hl-card-cta svg,
+.dp-app .dp-widget-btn svg {
+  color: #f4e9d8;
+}
+
+/* Star ratings stay the familiar gold, outside the palette */
+.hl-stars .on,
+.dp-app .hl-stars .on {
+  color: #f5b301;
+}
+
+.hl-stars .off {
+  color: #d9d4c7;
+}
+
+.hl-app input[type="range"],
+.dp-app input[type="range"] {
+  accent-color: #12453a;
+}
+
+/* ---------- admin ---------- */
+
+.ap-app {
+  --brand: #12453a;
+  --brand-dark: #0e3b32;
+  --brand-deep: #0b3029;
+  --brand-mid: #1b5a4b;
+  --brand-light: #245e50;
+  --line: rgba(139, 168, 136, 0.45);
+  --line-soft: rgba(139, 168, 136, 0.3);
+  --tint: #e8f1e9;
+  --tint-strong: #d8e6d9;
+  --ivory: #f4e9d8;
+  --paper: #ffffff;
+  --ink: #12453a;
+  --muted: #55665e;
+  --green: #12453a;
+  --green-bg: #e8f1e9;
+}
+
+.ap-header {
+  background: linear-gradient(115deg, #0b3029 0%, #0e3b32 48%, #12453a 100%);
+}
+
+.ap-rail {
+  background: #0e3b32;
+}
+
+.ap-brand-mark {
+  color: #12453a;
+}
+
+/* ---------- home overrides (match .home-page specificity) ---------- */
+
+.home-page .header.scrolled {
+  background: rgba(18, 69, 58, 0.96);
+}
+
+.home-page .footer,
+.home-page .hl-footer {
+  background: #12453a;
+}
+
+.home-page .section-desc,
+.home-page .about-copy,
+.home-page .about-value p,
+.home-page .about-approach p {
+  color: var(--muted);
+}
+
+.home-page .hotel-card,
+.home-page .feature,
+.home-page .testi-card,
+.home-page .about-value,
+.home-page .newsletter {
+  border-color: rgba(139, 168, 136, 0.4);
+}
+
+/* ---------- focus ---------- */
+
+:where(
+  .about-page,
+  .explore-destinations-page,
+  .contact-page,
+  .customer-enquiry-page,
+  .policy-page,
+  .property-page,
+  .signin-page,
+  .hl-app,
+  .dp-app,
+  .ap-app
+)
+  :focus-visible {
+  outline-color: #12453a;
+}
+
+.header :focus-visible,
+.hl-app :focus-visible,
+.dp-app :focus-visible,
+.ap-app :focus-visible {
+  outline-offset: 3px;
+}
+
+.header :focus-visible,
+.footer :focus-visible {
+  outline-color: #f4e9d8;
+}
+
+.hl-app .hl-seg:focus-within {
+  border-color: #12453a;
+  box-shadow: 0 0 0 3px rgba(18, 69, 58, 0.14);
+}
+
+/* ---------- brand: Palm & Sun mark + Fraunces wordmark ---------- */
+
+.brand-name,
+.signin-brand-name,
+.ap-brand-name {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+.brand-name em,
+.signin-brand-name em,
+.ap-brand-name em {
+  font-style: italic;
+  font-weight: 400;
+  color: #8ba888;
+}
+
+.brand .brand-mark,
+.ap-brand .brand-mark {
+  flex-shrink: 0;
+  color: #f4e9d8;
+  --brand-sun: #8ba888;
+}
+
+/* light surfaces: login dialog and sign-in card */
+.auth-dialog-brand .brand-mark,
+.signin-brand-mark .brand-mark {
+  flex-shrink: 0;
+  color: #12453a;
+  --brand-sun: #5f7d5c;
+}
+
+.auth-dialog-brand .brand-name em,
+.signin-brand-name em {
+  color: #5f7d5c;
+}
+
+.signin-brand-name {
+  font-size: 1.3rem;
+}
+
+.ap-brand {
+  gap: 10px;
+}
+
+.ap-brand .ap-brand-name {
+  font-size: 1.15em;
+}
+
+.home-page .header .brand-name,
+.home-page .footer .brand-name {
+  font-size: clamp(18px, 1.9vw, 24px);
+}
+
+.auth-dialog-choice {
+  border-color: rgba(139, 168, 136, 0.55);
+  background: #e8f1e9;
+}
+
+/* ---------- final sweep fixes ---------- */
+
+/* "Property not found" button: the hotel pages reset link colours */
+.dp-app .dp-404-btn {
+  color: #fff;
+  background: var(--grad);
+}
+
+/* Home "Travel inspiration" cards: grow with their text on small screens
+   instead of clipping the label and title */
+.offer-card {
+  height: auto;
+  min-height: 220px;
+}
+
+.offer-card img {
+  position: absolute;
+  inset: 0;
+}
+
+.offer-card .odiv {
+  position: relative;
+  z-index: 1;
+  inset: auto;
+  min-height: 220px;
+}
+
+@media (max-width: 600px) {
+  .offer-card .odiv {
+    padding: 28px 22px;
+  }
+}
+
+/* Destination cards: darker base so white text reads on pale or misty photos */
+.dest-card .overlay {
+  background: linear-gradient(
+    to top,
+    rgba(13, 49, 45, 0.94) 0%,
+    rgba(13, 49, 45, 0.7) 38%,
+    rgba(13, 49, 45, 0.15) 70%,
+    transparent
+  );
+}
+
+/* Old (crossed-out) prices: still muted, but readable */
+.hl-price-line s,
+.dp-app s {
+  color: #6f7d76;
+}
+
+/* Hotel detail: reviews and avatars in the palette instead of blue */
+.dp-score-big {
+  background: linear-gradient(160deg, #12453a, #1b5a4b);
+}
+
+.dp-cat-bar {
+  background: #e8f1e9;
+}
+
+.dp-cat-bar i {
+  background: linear-gradient(90deg, #5f7d5c, #12453a);
+}
+
+.dp-avatar {
+  background: linear-gradient(135deg, #2c7a60, #12453a);
+}

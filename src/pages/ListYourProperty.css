@@ -9,6 +9,8 @@
 .property-hero h1 > span { color: var(--blue, #4f46e5); }
 .property-hero-copy > p { max-width: 590px; margin: 22px 0 0; color: var(--muted, #64748b); font-size: 1rem; line-height: 1.8; }
 .property-hero-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; text-decoration: none; }
+.property-submit { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 23px; border: 2px solid #f4e9d8; background: transparent; color: #12453a; box-shadow: 0 10px 22px rgba(18, 69, 58, 0.08); }
+.property-submit:disabled { opacity: .65; cursor: wait; transform: none; }
 .property-trust-line { display: flex; align-items: center; gap: 8px; margin-top: 17px; color: var(--muted, #64748b); font-size: .82rem; }
 .property-trust-line svg { color: var(--blue, #4f46e5); }
 .property-hero-image { position: relative; min-height: 410px; overflow: hidden; border-radius: 24px; background: #dbe6f7; box-shadow: 0 24px 60px rgba(9,28,54,.16); animation: property-rise .72s .08s ease both; }

@@ -24,7 +24,7 @@ export default function PolicyPage({ policy }) {
       descriptionTag.name = 'description';
       document.head.appendChild(descriptionTag);
     }
-    document.title = `${content.title} | Stay Ease`;
+    document.title = `${content.title} | VibezRoutes`;
     descriptionTag.content = content.description;
 
     return () => {
@@ -39,11 +39,10 @@ export default function PolicyPage({ policy }) {
       <main>
         <section className="policy-hero">
           <div className="container">
-            <span className="section-tag"><Icon size={15} /> STAY EASE POLICIES</span>
+            <span className="section-tag"><Icon size={15} /> VibezRoutes policies</span>
             <h1>{content.title}</h1>
             <p>{content.intro}</p>
             <span className="policy-updated">Last updated: {POLICY_LAST_UPDATED}</span>
-            <p className="policy-review-note">Draft for business confirmation and review by a qualified legal professional before publication.</p>
           </div>
         </section>
 
@@ -61,7 +60,7 @@ export default function PolicyPage({ policy }) {
               </nav>
               <div className="policy-aside-contact">
                 <h3>Questions?</h3>
-                <p>Contact Stay Ease through the customer enquiry page.</p>
+                <p>Contact VibezRoutes through the customer enquiry page.</p>
                 <Link to="/contact">Contact Us <ArrowRight size={15} /></Link>
               </div>
             </aside>
@@ -82,7 +81,7 @@ export default function PolicyPage({ policy }) {
               <div className="policy-bottom">
                 <p>{content.closing}</p>
                 <p>Questions about this policy? <Link to="/contact">Contact Us</Link>.</p>
-                <nav className="policy-other-links" aria-label="Other Stay Ease policies">
+                <nav className="policy-other-links" aria-label="Other VibezRoutes policies">
                   {otherPolicies.map((item) => <Link key={item.key} to={item.path}>{item.title}</Link>)}
                 </nav>
               </div>

@@ -99,9 +99,9 @@ export default function ExploreDestinations() {
           <img src={destinations[0].image} alt="Tea gardens across the hills of Ooty, South India" fetchPriority="high" />
           <div className="explore-hero-shade" />
           <div className="container explore-hero-content">
-            <span className="explore-hero-label">Your next journey starts here</span>
-            <h1 id="explore-hero-title">Discover South India,<br />One Stay at a Time</h1>
-            <p>From mist-covered mountains and peaceful backwaters to heritage towns and vibrant cities, discover destinations that make every journey memorable. Find the places you want to explore and the stays that make you feel at home.</p>
+            <span className="explore-hero-label">Find your vibe. Follow your route.</span>
+            <h1 id="explore-hero-title">Find a place that<br />sets your pace</h1>
+            <p>From tea-covered hills and palm-lined backwaters to heritage streets and lively cities, explore South Indian destinations and the stay options listed for your plans.</p>
             <a href="#explore-destinations" className="btn-signup explore-hero-cta">Explore destinations <ArrowRight size={17} /></a>
           </div>
           <a className="explore-hero-credit" href={destinations[0].source} target="_blank" rel="noreferrer">
@@ -112,9 +112,9 @@ export default function ExploreDestinations() {
         <section className="section explore-destinations-section" id="explore-destinations" aria-labelledby="destinations-title">
           <div className="container">
             <div className="section-head">
-              <span className="section-tag">Explore South India</span>
-              <h2 className="section-title" id="destinations-title">Find a place for <span className="hl">your next story</span></h2>
-              <p className="section-desc">Nine destinations, each with its own landscape, rhythm, and reasons to visit.</p>
+              <span className="section-tag">Take the scenic route</span>
+              <h2 className="section-title" id="destinations-title">A new place, <span className="hl">a different feeling</span></h2>
+              <p className="section-desc">Browse nine destinations, from hill-country mornings to days by the water and city streets worth exploring.</p>
             </div>
             <p className="destination-listing-note">
               Explore Stays opens location-filtered results for Ooty, Munnar, Puducherry, and Hyderabad. For Kodaikanal, Alleppey, Coorg, Mysuru, and Wayanad, it opens the current hotel list because destination-specific filters are not available for those places yet.
@@ -150,10 +150,10 @@ export default function ExploreDestinations() {
             <div className="explore-story-copy">
               <span className="section-tag">The beauty of South India</span>
               <h2 id="explore-story-title">Every Destination Has a <span className="hl">Story to Tell</span></h2>
-              <p>Some journeys are made for the mountains, where mist settles over tea gardens and mornings begin with cool, fresh air. Others lead to peaceful backwaters, quiet beaches, heritage streets, or cities filled with culture and energy.</p>
-              <p>South India offers a different experience at every turn. Wander through the green landscapes of Munnar, slow down beside the backwaters of Alleppey, discover the charm of Puducherry, or experience the royal heritage of Mysuru. Whether you're planning a weekend escape, a family holiday, a romantic getaway, or a city break, there's a destination waiting to match your kind of journey.</p>
-              <p>At Stay Ease, we believe finding your next destination should be part of the excitement. Explore places that inspire you, discover stays that suit your plans, and make room for experiences worth remembering.</p>
-              <strong className="explore-story-closing">Find your place. Begin your story.</strong>
+              <p>Some days call for mountain air and tea gardens. Others are better spent beside the backwaters, along a quiet shore, or wandering a city with no fixed plan.</p>
+              <p>Follow the green roads around Munnar, take in the waterways of Alleppey, wander Puducherry’s seaside streets, or spend a day among Mysuru’s heritage. Each destination brings a different pace and a different way to spend your time.</p>
+              <p>VibezRoutes brings these places and stay options together, so you can explore what catches your eye and compare the details that matter to your trip.</p>
+              <strong className="explore-story-closing">Choose a direction. Make it your own.</strong>
             </div>
           </div>
         </section>

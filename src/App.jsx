@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -11,16 +12,13 @@ import ListYourProperty from "./pages/ListYourProperty";
 import PolicyPage from "./pages/PolicyPage";
 import CustomerEnquiry from "./pages/CustomerEnquiry";
 import SignIn from "./pages/SignIn";
-import SignUpUnavailable from "./pages/SignUpUnavailable";
+import SignUp from "./pages/SignUpUnavailable";
+import "./theme.css";
 
 function App() {
   return (
     <BrowserRouter>
-
-      
-
       <Routes>
-
         <Route path="/" element={<Home />} />
 
         <Route path="/about" element={<About />} />
@@ -33,22 +31,28 @@ function App() {
 
         <Route path="/customer-enquiry" element={<CustomerEnquiry />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUpUnavailable />} />
+        <Route path="/sign-up" element={<SignUp />} />
 
         <Route path="/refund-policy" element={<PolicyPage policy="refund" />} />
-        <Route path="/privacy-policy" element={<PolicyPage policy="privacy" />} />
-        <Route path="/terms-and-conditions" element={<PolicyPage policy="terms" />} />
-        <Route path="/cancellation-policy" element={<PolicyPage policy="cancellation" />} />
+        <Route
+          path="/privacy-policy"
+          element={<PolicyPage policy="privacy" />}
+        />
+        <Route
+          path="/terms-and-conditions"
+          element={<PolicyPage policy="terms" />}
+        />
+        <Route
+          path="/cancellation-policy"
+          element={<PolicyPage policy="cancellation" />}
+        />
 
         <Route path="/HotelList" element={<HotelList />} />
 
         <Route path="/HotelDetailPage" element={<HotelDetailPage />} />
         <Route path="/hotel/:id" element={<HotelDetailPage />} />
         <Route path="/AdminPanel" element={<AdminPanel />} />
-
-
       </Routes>
-
     </BrowserRouter>
   );
 }

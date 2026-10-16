@@ -34,6 +34,8 @@ import {
   CURRENCY,
 } from './HotelList';
 
+import { AboutFooter, SitePageHeader } from './About';
+import './Home.css';
 import './HotelDetailPage.css';
 
 const API_BASE =
@@ -138,12 +140,10 @@ const normalizeHotel = (rawHotel) => {
     gallery[0] ||
     '';
 
-  const finalGallery =
-    gallery.length > 0
-      ? gallery
-      : image
-        ? [image]
-        : [];
+  // The cover photo always leads the gallery.
+  const finalGallery = image
+    ? [image, ...gallery.filter((src) => src !== image)]
+    : gallery;
 
   const rooms =
     Array.isArray(rawHotel.rooms) &&
@@ -351,6 +351,19 @@ export default function HotelDetailPage() {
   const [done, setDone] = useState(false);
 
   const [wish, setWish] = useState(false);
+
+  // Esc closes the reservation dialog, like its Close button.
+  useEffect(() => {
+    if (!confirm) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setConfirm(null);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [confirm]);
 
   /* ============================================================
      NIGHTS
@@ -705,6 +718,8 @@ export default function HotelDetailPage() {
 
   if (loading) {
     return (
+      <div className="dp-app">
+      <SitePageHeader activePage="hotels" />
       <div className="dp-404">
         <h1>Loading property...</h1>
 
@@ -712,6 +727,7 @@ export default function HotelDetailPage() {
           Please wait while we load
           the hotel details.
         </p>
+      </div>
       </div>
     );
   }
@@ -722,6 +738,8 @@ export default function HotelDetailPage() {
 
   if (!hotel) {
     return (
+      <div className="dp-app">
+      <SitePageHeader activePage="hotels" />
       <div className="dp-404">
         <h1>Property not found</h1>
 
@@ -731,11 +749,13 @@ export default function HotelDetailPage() {
         </p>
 
         <Link
-          to="/"
+          to="/HotelList"
           className="dp-404-btn"
         >
           Back to hotels
         </Link>
+      </div>
+      <AboutFooter activePage="hotels" />
       </div>
     );
   }
@@ -755,6 +775,7 @@ export default function HotelDetailPage() {
 
   return (
     <div className="dp-app">
+      <SitePageHeader activePage="hotels" />
 
       {/* ======================================================
           SUB NAV
@@ -764,7 +785,7 @@ export default function HotelDetailPage() {
         <div className="dp-subnav-inner">
 
           <Link
-            to="/"
+            to="/HotelList"
             className="dp-back"
           >
             <ArrowLeft size={15} />
@@ -1592,7 +1613,7 @@ export default function HotelDetailPage() {
                     Payment
                   </b>
                   <span>
-                    Cards, UPI and cash
+                    Confirm payment details with the accommodation provider
                     accepted.
                   </span>
                 </div>
@@ -2161,7 +2182,7 @@ export default function HotelDetailPage() {
                 <div className="dp-modal-head">
 
                   <h3>
-                    Confirm your booking
+                    Review your stay
                   </h3>
 
                   <button
@@ -2277,7 +2298,7 @@ export default function HotelDetailPage() {
                   <div className="dp-modal-total">
 
                     <span>
-                      Total incl. taxes
+                      Estimated stay total
                     </span>
 
                     <b>
@@ -2306,7 +2327,7 @@ export default function HotelDetailPage() {
                       setDone(true)
                     }
                   >
-                    Confirm booking
+                    Review next steps
                   </button>
 
                 </div>
@@ -2315,18 +2336,15 @@ export default function HotelDetailPage() {
               <div className="dp-modal-done">
 
                 <span className="dp-done-ic">
-                  <Check
-                    size={44}
-                    strokeWidth={2.5}
-                  />
+                  <Info size={42} />
                 </span>
 
                 <h3>
-                  Booking confirmed!
+                  No reservation has been made
                 </h3>
 
                 <p>
-                  {hotel.name}
+                  This page has not reserved a room or sent your details to the property. Send a travel enquiry separately, then confirm availability and terms with the accommodation provider.
                 </p>
 
                 <div className="dp-done-row">
@@ -2357,21 +2375,6 @@ export default function HotelDetailPage() {
 
                 </div>
 
-                <div className="dp-done-row">
-
-                  <span>
-                    Confirmation number
-                  </span>
-
-                  <b>
-                    TN-
-                    {hotel.id
-                      .slice(0, 6)
-                      .toUpperCase()}
-                  </b>
-
-                </div>
-
                 <div className="dp-modal-foot center">
 
                   <button
@@ -2385,12 +2388,12 @@ export default function HotelDetailPage() {
 
                   <Link
                     className="solid"
-                    to="/"
+                    to="/customer-enquiry"
                     onClick={() =>
                       setConfirm(null)
                     }
                   >
-                    Back to search
+                    Send a travel enquiry
                   </Link>
 
                 </div>
@@ -2402,6 +2405,7 @@ export default function HotelDetailPage() {
         </div>
       )}
 
+      <AboutFooter activePage="hotels" />
     </div>
   );
 }

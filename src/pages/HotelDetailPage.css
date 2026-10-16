@@ -1,4 +1,4 @@
-/* HotelDetailPage.css — TravelNest hotel detail page */
+/* Hotel detail page styles for VibezRoutes */
 
 .dp-app {
   --navy: #013580;
@@ -19,7 +19,14 @@
   --shadow-sm: 0 1px 3px rgba(15, 26, 46, 0.07);
   --shadow-md: 0 6px 22px rgba(15, 26, 46, 0.1);
   --shadow-lg: 0 16px 44px rgba(15, 26, 46, 0.16);
-  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    "Inter",
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   color: var(--ink);
   background: var(--bg);
   min-height: 100vh;
@@ -64,7 +71,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-weight: 800;
   font-size: 20px;
   letter-spacing: -0.02em;
@@ -359,7 +366,7 @@
 
 .dp-titlebar h1 {
   margin: 0 0 10px;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: clamp(24px, 3.4vw, 36px);
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -463,7 +470,7 @@
 }
 
 .dp-score-txt b {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 16px;
   font-weight: 800;
 }
@@ -489,12 +496,12 @@
   box-shadow: var(--shadow-sm);
   padding: 24px 26px;
   margin-bottom: 18px;
-  scroll-margin-top: 74px;
+  scroll-margin-top: calc(var(--site-header-h, 70px) + 74px);
 }
 
 .dp-sec h2 {
   margin: 0 0 16px;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -590,7 +597,9 @@
   border: 1px solid var(--line);
   border-radius: 13px;
   overflow: hidden;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .dp-room:hover {
@@ -685,7 +694,7 @@
 }
 
 .dp-room-p {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 22px;
   font-weight: 800;
   color: var(--navy);
@@ -717,7 +726,9 @@
   font-weight: 700;
   padding: 11px 22px;
   border-radius: 9px;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
 }
 
 .dp-room-price button:hover {
@@ -786,7 +797,7 @@
 }
 
 .dp-score-big-num {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 44px;
   font-weight: 800;
   line-height: 1;
@@ -838,7 +849,9 @@
 }
 
 @keyframes dpBar {
-  from { width: 0; }
+  from {
+    width: 0;
+  }
 }
 
 .dp-cat b {
@@ -955,7 +968,10 @@
     linear-gradient(rgba(214, 226, 238, 0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(214, 226, 238, 0.4) 1px, transparent 1px),
     linear-gradient(160deg, #e9f1f7, #e0ebf4);
-  background-size: 40px 40px, 40px 40px, cover;
+  background-size:
+    40px 40px,
+    40px 40px,
+    cover;
   border: 1px solid var(--line);
 }
 
@@ -1152,7 +1168,7 @@
 }
 
 .dp-widget-price b {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 30px;
   font-weight: 800;
   color: var(--navy);
@@ -1220,7 +1236,9 @@
   border-radius: 12px;
   background: #fff;
   overflow: hidden;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .dp-date-box:hover,
@@ -1303,7 +1321,10 @@
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 12px;
-  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background-color 0.15s;
 }
 
 .dp-guest-select select:hover,
@@ -1348,25 +1369,30 @@
 }
 
 .dp-widget-total span:last-child {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 18px;
   color: var(--navy);
 }
 
 .dp-widget-btn {
   width: 100%;
-  border: none;
+  border: 2px solid rgba(18, 69, 58, 0.14);
   border-radius: 11px;
-  background: var(--blue);
-  color: #fff;
+  background: #f4e9d8;
+  color: #12453a;
   font-size: 16px;
   font-weight: 800;
   padding: 15px;
-  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 12px 24px rgba(18, 69, 58, 0.12);
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
 }
 
 .dp-widget-btn:hover {
-  background: var(--blue-dark);
+  background: #f0e4d1;
+  box-shadow: 0 14px 28px rgba(18, 69, 58, 0.18);
 }
 
 .dp-widget-btn:active {
@@ -1415,7 +1441,7 @@
 
 .dp-similar h2 {
   margin: 0 0 16px;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 21px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -1433,7 +1459,9 @@
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .dp-sim-card:hover {
@@ -1508,7 +1536,7 @@
 }
 
 .dp-sim-price {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: var(--navy);
@@ -1541,7 +1569,9 @@
 }
 
 @keyframes dpFade {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
 .dp-lightbox img {
@@ -1624,7 +1654,9 @@
   overflow: hidden;
   flex-shrink: 0;
   opacity: 0.55;
-  transition: opacity 0.15s, border-color 0.15s;
+  transition:
+    opacity 0.15s,
+    border-color 0.15s;
 }
 
 .dp-lb-thumbs button.on {
@@ -1665,8 +1697,14 @@
 }
 
 @keyframes dpPop {
-  from { opacity: 0; transform: translateY(18px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .dp-modal-head {
@@ -1774,7 +1812,7 @@
 }
 
 .dp-modal-total b {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 21px;
   font-weight: 800;
 }
@@ -1881,7 +1919,7 @@
 }
 
 .dp-404 h1 {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   font-size: 28px;
   font-weight: 800;
   margin: 0 0 10px;
@@ -1915,7 +1953,7 @@
 
 @media (max-width: 960px) {
   .dp-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .dp-widget {
@@ -1927,13 +1965,23 @@
     max-width: 100%;
   }
 
+  /* Main photo full width, thumbnails in one row underneath */
   .dp-gallery {
-    grid-template-columns: 1fr 1fr;
-    height: 300px;
+    grid-template-columns: 1fr;
+    height: auto;
   }
 
   .dp-g-main {
-    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .dp-g-side {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .dp-g-side button {
+    aspect-ratio: 4 / 3;
   }
 
   .dp-g-main .dp-g-all {
@@ -1985,7 +2033,7 @@
   }
 
   .dp-mbar-price b {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-family: "Plus Jakarta Sans", "Inter", sans-serif;
     font-size: 19px;
     color: var(--navy);
   }
@@ -2054,6 +2102,10 @@
     flex-direction: column;
   }
 
+  .dp-review-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .dp-cats {
     grid-template-columns: 1fr;
   }
@@ -2097,7 +2149,6 @@
 
 @media (max-width: 520px) {
   .dp-gallery {
-    height: 260px;
     gap: 6px;
   }
 

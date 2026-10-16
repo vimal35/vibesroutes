@@ -18,14 +18,14 @@ const subjectOptions = [
 
 const enquiries = [
   {
-    title: 'General Enquiries',
-    description: 'For questions about Stay Ease and our platform.',
+    title: 'Questions about your trip',
+    description: 'Ask about exploring destinations, stays, or using the website.',
     icon: MessageCircle,
     destination: 'faq',
   },
   {
-    title: 'Property Partnerships',
-    description: 'Interested in listing your property on Stay Ease? Tell us a little about your stay to get started.',
+    title: 'Property enquiries',
+    description: 'Share a few details about your property to start an enquiry.',
     icon: Building2,
     destination: 'property',
   },
@@ -33,24 +33,24 @@ const enquiries = [
 
 const faqs = [
   {
-    question: 'How can I ask a question about a booking?',
-    answer: 'Use the contact form above and select the relevant enquiry type. If you have a booking reference, include it so your request has the necessary context.',
+    question: 'How can I ask about a stay?',
+    answer: 'Use the contact form and choose the enquiry type that best fits your question. If you have a booking reference, include it for context.',
   },
   {
-    question: 'Can I contact Stay Ease before making a booking?',
-    answer: 'Yes. You can send a general enquiry if you need clarification about the platform or want to understand the available options before planning your stay.',
+    question: 'Can I get in touch before choosing a stay?',
+    answer: 'Yes. Send a general enquiry if you have a question about the website or want to ask about the options shown.',
   },
   {
-    question: 'I want to list my property on Stay Ease. What should I do?',
-    answer: 'Select “Listing My Property” in the contact form and tell us a little about your property and enquiry.',
+    question: 'How do I enquire about listing a property?',
+    answer: 'Choose “Listing My Property” in the contact form and share a little about the property and your question. Sending an enquiry does not create or publish a listing.',
   },
   {
-    question: 'What should I include in my message?',
+    question: 'What details should I include?',
     answer: 'Describe your question clearly and include relevant details. If your enquiry concerns an existing booking, include the booking reference where available. Avoid sharing passwords, payment card details, or other sensitive information.',
   },
   {
-    question: 'How will I know whether my message was submitted?',
-    answer: 'After a successful submission, the page will display a confirmation message. Email confirmation is not available unless the contact service is configured to provide it.',
+    question: 'How will I know if my message went through?',
+    answer: 'The page displays a confirmation only after the contact service accepts your message. Email confirmation is not available unless that service is configured to provide it.',
   },
 ];
 
@@ -178,9 +178,9 @@ export default function Contact() {
         <section className="contact-hero" aria-labelledby="contact-title">
           <div className="container contact-hero-layout">
             <div className="contact-hero-copy">
-              <span className="contact-eyebrow"><span /> We're here for you</span>
-              <h1 id="contact-title">Let's Make Your Next Stay <span className="hl">Easier.</span></h1>
-              <p>Have a question, need help planning your stay, or want to know more about Stay Ease? We'd love to hear from you. Tell us what you need, and let's make your next journey a little simpler.</p>
+              <span className="contact-eyebrow"><span /> A route for every kind of question</span>
+              <h1 id="contact-title">Let’s talk about <span className="hl">what’s next.</span></h1>
+              <p>Ask us about the website, a stay you’re considering, or a property enquiry. Share the details that matter and we’ll receive your message through the contact form.</p>
               <button className="btn-signup contact-primary-cta" type="button" onClick={scrollToForm}>Get in Touch <ArrowDown size={17} /></button>
             </div>
             <div className="contact-hero-visual" aria-hidden="true">
@@ -272,7 +272,7 @@ export default function Contact() {
                   ))}
                 </div>
                 <div className="contact-existing-details">
-                  <a href="mailto:support@stayease.com"><Mail size={17} /> support@stayease.com</a>
+                  <a href="mailto:support@vibezroutes.com"><Mail size={17} /> support@vibezroutes.com</a>
                   <a href="tel:+918005550199"><Phone size={17} /> +91 80055 50199</a>
                 </div>
               </aside>
@@ -289,8 +289,8 @@ export default function Contact() {
               <span className="section-tag">Every journey matters</span>
               <h2 id="contact-story-title">A Better Stay Begins With a <span className="hl">Conversation</span></h2>
               <p>Every journey comes with its own plans, questions, and little details that matter. Whether you're exploring a new destination, arranging a family holiday, planning a weekend escape, or considering listing your property, we're here to make the process feel easier.</p>
-              <p>At Stay Ease, we believe that a good travel experience starts with clarity and thoughtful support. Your questions and feedback help us understand what matters to travelers and how we can continue improving the way people discover their next stay.</p>
-              <strong>Your next journey matters to us.</strong>
+              <p>VibezRoutes brings destination ideas and stay information together. If something is unclear as you explore, use the form to tell us what you need to know.</p>
+              <strong>Every trip has its own questions. Start with yours.</strong>
             </div>
           </div>
         </section>
@@ -328,7 +328,7 @@ export default function Contact() {
           <div className="contact-final-icon"><ShieldCheck size={25} aria-hidden="true" /></div>
           <div>
             <h2 id="contact-final-title">Your Next Journey Starts With a Conversation.</h2>
-            <p>Have something in mind? We're ready to hear from you.</p>
+            <p>Share a question about a destination, stay, or property enquiry.</p>
           </div>
           <button type="button" className="btn-signup" onClick={scrollToForm}>Send Us a Message <ArrowRight size={16} /></button>
         </section>
